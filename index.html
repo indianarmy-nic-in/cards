@@ -1,454 +1,489 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<title>Secure Login Card</title>
-<style>
-  /* Reset and base */
-  body, html {
-    margin: 0; padding: 0; height: 100%; width: 100%; 
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Safari */
-    -khtml-user-select: none;    /* Konqueror HTML */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Non-prefixed version */
-  }
-  
-  /* Prevent zoom */
-  html {
-    touch-action: manipulation;
-  }
-  /* Disable Ctrl+ or Ctrl- */
-  body {
-    -ms-content-zooming:none; 
-    -ms-touch-action:none;
-  }
-  @media only screen and (max-width: 600px) {
-    /* Not required for desktop but safe fallback */
-  }
+    <meta charset="UTF-8">
+    <!-- मोबाइल स्क्रीन पर सही फिट होने के लिए -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <title>My App</title>
 
-  /* Top image, full width */
-  #topImage {
-    width: 100vw;
-    height: auto;
-    max-height: 250px;
-    object-fit: cover;
-    user-select: none;
-    pointer-events: none;
-  }
-  
-  /* Container under image */
-  #loginContainer {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 10px 20px;
-    text-align: center;
-  }
-  
-  select, input[type=text], button {
-    font-size: 1rem;
-    padding: 10px;
-    margin: 6px 0;
-    width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    user-select: text;
-  }
-  button {
-    cursor: pointer;
-    background: #0077cc;
-    color: white;
-    border: none;
-  }
-  button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
+    <!-- 1. होम स्क्रीन आइकॉन (यहाँ अपने आइकॉन का सही रास्ता/पाथ डालें) -->
+    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_of_the_Indian_Armed_Forces.svg/1280px-Logo_of_the_Indian_Armed_Forces.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail">
+    <!-- अलग-अलग iPhone साइज़ के लिए (वैकल्पिक लेकिन बेहतर प्रदर्शन के लिए) -->
+    <link rel="apple-touch-icon" sizes="152x152" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_of_the_Indian_Armed_Forces.svg/1280px-Logo_of_the_Indian_Armed_Forces.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_of_the_Indian_Armed_Forces.svg/1280px-Logo_of_the_Indian_Armed_Forces.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail">
 
-  #submitBtn {
-    display:none; /* hidden initially */
-  }
+    <!-- 2. वेबसाइट को ऐप की तरह फुल स्क्रीन में खोलने के लिए (यूआरएल बार छिप जाएगी) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- 3. ऊपर की स्टेटस बार (बैटरी/नेटवर्क वाली पट्टी) को ट्रांसपेरेंट करने के लिए ताकि ऐप फुल स्क्रीन दिखे -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- 4. होम स्क्रीन पर ऐप का क्या नाम दिखेगा -->
+    <meta name="apple-mobile-web-app-title" content="My App Name">
 
-  #errorMsg {
-    color: red;
-    height: 1.2em;
-    margin: 8px 0;
-    font-weight: bold;
-  }
-
-  /* Loading animation */
-  #loading {
-    display:none;
-    margin: 20px auto;
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #0077cc;
-    border-radius: 50%;
-    width: 50px; height: 50px;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    0% { transform: rotate(0deg);}
-    100% { transform: rotate(360deg);}
-  }
-
-  /* Card container (flip) */
-  #cardContainer {
-    perspective: 1000px;
-    margin: 20px auto;
-    width: 340px;
-    height: 214.6px; /* approx 85.6mm x 53.98mm at 4px/mm */
-    display: none;
-    cursor: pointer;
-  }
-  
-  /* Flip card styles */
-  .card {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 8px;
-    user-select:none;
-  }
-
-  .card.is-flipped {
-    transform: rotateY(180deg);
-  }
-  
-  .card .side {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 8px;
-  }
-  
-  .card .front {
-    background: white;
-  }
-  .card .back {
-    background: white;
-    transform: rotateY(180deg);
-  }
-
-  .card img {
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
-    user-select:none;
-    pointer-events:none;
-  }
-
-  /* Footer styles */
-  footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #444;
-    margin: 40px auto 20px auto;
-    user-select:none;
-  }
-  footer p {
-    margin: 4px 0;
-  }
-</style>
+    <!-- 5. ज़ीरो मार्जिन और फुल स्क्रीन के लिए CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: x-hidden;
+            background-color: #ffffff; /* अपनी पसंद का बैकग्राउंड कलर डालें */
+            /* iPhone के नॉच (Notch) के अंदर कंटेंट को न घुसने देने के लिए पैडिंग (यदि ज़रूरत हो) */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
 </head>
 <body>
 
-<!-- Top image, customizable -->
-<img id="topImage" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHHSdzBBAKyMzj6x2mR6MRVexUvwW8XqrbmiFFZf17jpuqd3SlIjBSYVkDlKQvMRMRdqAYAOo81-xPR4nbLHGyp0Rg6hzxpfi6Rl9YJtV3M2NBAPG3X_5E0U4ySTCQOA2WtEx0UgC6o8ELCEXOe0kdvY1dC-k0VZUNznQJ-2AeKhSk9oq1X8MsM6oyp9o/s1600/INDIAN%20ARMED%20FORCES.jpg" alt="Header Image" />
 
-<div id="loginContainer">
-  <select id="loginType" aria-label="Select login type">
-    <option value="defence">DEFENCE ID</option>
-    <option value="csd">CSD SMART CARD</option>
-  </select>
 
-  <input id="loginInput" type="text" autocomplete="off" placeholder="Enter DEFENCE ID" aria-label="Login ID input">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>CSD ID Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* सुरक्षा: टेक्स्ट सिलेक्शन और कॉपी रोकना */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
 
-  <div id="errorMsg" aria-live="polite"></div>
+        /* स्क्रॉलिंग इनेबल करने के लिए सेटिंग्स */
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto; /* नीचे की तरफ स्क्रॉलिंग चालू की गई */
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
+        }
 
-  <button id="submitBtn" type="button">Submit</button>
-</div>
+        /* Card 3D Setup */
+        .flip-card {
+            perspective: 1200px;
+            width: 344px;
+            height: 216px;
+            margin: auto;
+            position: relative;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .flip-card-front img, .flip-card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
 
-<div id="loading" role="alert" aria-live="assertive" aria-busy="true" aria-label="Loading animation"></div>
+        /* प्रीलोडर: फिक्स्ड ओवरले */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920') center center / cover no-repeat;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-<div id="cardContainer" aria-live="polite" aria-label="ID card display">
-  <div class="card" id="flipCard" tabindex="0" role="button" aria-pressed="false">
-    <div class="side front">
-      <!-- Front image changes by login type -->
-      <img id="frontImage" src="" alt="Front side of card" />
+        /* बड़ा लोगो और 3D एनीमेशन */
+        .preloader-logo-wrap {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .breaking-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            animation: assembleLogo 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+        }
+
+        /* ग्लो इफेक्ट */
+        .preloader-logo-wrap::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 1;
+            opacity: 0;
+            animation: softGlow 3.5s ease-in-out forwards;
+        }
+
+        /* चमक (Shining) इफेक्ट */
+        .shine-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            -webkit-mask-image: url('https://csdindia.gov.in/images/logo.png');
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+        }
+        
+        .shine-layer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                to right, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.9) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shineEffect 1.5s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes assembleLogo {
+            0% {
+                transform: scale(0.2) rotateX(70deg) rotateY(100deg);
+                opacity: 0;
+                filter: blur(8px);
+            }
+            100% {
+                transform: scale(1) rotateX(0deg) rotateY(0deg);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        @keyframes softGlow {
+            0% { opacity: 0; transform: scale(0.5); }
+            30% { opacity: 1; transform: scale(1.1); filter: blur(30px); }
+            70% { opacity: 0.8; transform: scale(1); filter: blur(45px); }
+            100% { opacity: 0.1; transform: scale(0.9); filter: blur(60px); }
+        }
+
+        @keyframes shineEffect {
+            100% { left: 140%; }
+        }
+
+        /* उत्पाद इमेज का निश्चित और समान आकार */
+        .prod-img-box {
+            width: 160px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            margin: 0 auto 0.5rem auto;
+            background: #f9fafb;
+        }
+        .prod-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 3D Pop-up Modal */
+        .modal-3d {
+            transform: scale(0.7) rotateX(-15deg);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-active .modal-3d {
+            transform: scale(1) rotateX(0deg);
+            opacity: 1;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-start select-none" oncontextmenu="return false;">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-logo-wrap">
+            <img class="breaking-logo" src="https://csdindia.gov.in/images/logo.png" alt="CSD Logo" draggable="false">
+            <div class="shine-layer"></div>
+        </div>
     </div>
-    <div class="side back">
-      <!-- Back image changes by login type -->
-      <img id="backImage" src="" alt="Back side of card" />
+
+    <!-- Main Wrapper: h-screen को min-h-screen में बदला और overflow हटाया ताकि स्क्रॉल हो सके -->
+    <div class="w-full min-h-screen flex flex-col items-center justify-between py-6 px-4 box-border">
+        
+        <!-- बड़ा हेडर लोगो -->
+        <div class="w-full text-center mt-0 pt-0 mb-4">
+            <img src="https://csdindia.gov.in/images/logo.png" alt="CSD Header Logo" width="240" class="mx-auto drop-shadow-md" draggable="false">
+        </div>
+
+        <!-- Main Portal UI Content -->
+        <div id="mainContent" class="hidden w-full max-w-md my-auto flex flex-col justify-center gap-4">
+            <!-- ID Card Container -->
+            <div class="flip-card" id="interactiveCard">
+                <div id="flipCardInner" class="flip-card-inner">
+                    <!-- Front View -->
+                    <div class="flip-card-front">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAVH_PBkkNGf5WPJ-m76cuw9Ww-skMaO-ubHGH1Ub-ACgp8HSL-2d_8SJtlwYgp-uQl078kdVtVX95Wb1jMEuGfKzn2C2E3RbtSbXXrOWW9OgiVLP8qQto1lfIRwgq3Pen7BDyqeL8kdrZ9o7GTzTJZrjp_Je9v6Chh0NM4vMTuW8BoLv5MnJEtEBW4RlH/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.jpeg" alt="Card Front" draggable="false" />
+                    </div>
+                    <!-- Back View -->
+                    <div class="flip-card-back">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-lsiN1HOXb97ZhI-49vA2z8NYYYhJN_jWZGodHuFRziKNTO-uuciSKDdnqxjJC6lD0PCWNwCir5K3l206DaH5C4D5vccs-XyjP4VKSlKTpPup_8GuOz7z-dGGkKXQhjWPITT_ffvaehQnVAGb7ZZJX3cUDi93_JFGuwLUhA_hSCo6HYDeVNz2AB0Le00k/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1%20-%204.jpeg" alt="Card Back" draggable="false" />
+                    </div>
+                </div>
+            </div>
+
+<h2  style="font-size:30px;"><strong> Notice </strong> </h2>
+
+<p style="color:black;"> You are informed that your <strong style="color:black;"> Canteen Liquor Card / Liquor Quota </strong> is currently <strong style="color:black;"> Inactive.</strong>Therefore, you will not be eligible for the monthly limit of 10 bottles.
+To reactivate the quota, kindly contact the concerned Army Headquarters or inform your station Adjutant and complete the required form process.</p>
+
+
+            <!-- Purchase CSD Box 1 -->
+            <div class="w-full bg-white rounded-xl shadow-md p-4">
+                <h3 class="text-center text-xl font-bold mb-4 text-gray-800 tracking-wide">Purchase AFD <br/>(Against Firm Demand) </h3>
+                <div class="flex gap-4 justify-center">
+                    <!-- Box 1 -->
+                    <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
+                        <div class="prod-img-box">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6aJCGN_v17Imb8GgyzaOpwJxj1OlxgcP0G5TRB3EqjLFRm2sypZP57TYYncsU51BrUitCNjJEVoUGbSp0smGDOgmwQFwf0rdUFkQE2Yw-o9TLWagmyZfL2MA4_HFZwkW5Vihs7h-1tqjaXgIqg-TIc0uEpD5ybgzCFW1_PNIGnDheC_ZPi6JZx80VB8Tf/s16000/IMG_8525.png" alt="Activa" draggable="false" />
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Honda Activa 125 DLX</h4>
+                        <p class="text-[10px] text-gray-500">01 Oct 2025</p>
+                        <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹88,377</p>
+                    </div>
+                    <!-- Box 2 -->
+                    <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
+                        <div class="prod-img-box">
+                            <img src="https://imgd.aeplcdn.com/370x208/n/8zk4f0b_1627093.jpg?q=80" alt="XUV300" draggable="false" />
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Mahindra XUV300 W4</h4>
+                        <p class="text-[10px] text-gray-500">11 Oct 2022</p>
+                        <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹7.50 Lakh*</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- Purchase CSD Box 2 (Duplicate for content length) -->
+            <div class="w-full bg-white rounded-xl shadow-md p-4">
+                <h3 class="text-center text-xl font-bold mb-4 text-gray-800 tracking-wide">Purchase CSD <br/>(Canteen Stores Department)</h3>
+                <div class="flex gap-4 justify-center">
+                    <!-- Box 1 -->
+                    <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
+                        <div class="prod-img-box">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6aJCGN_v17Imb8GgyzaOpwJxj1OlxgcP0G5TRB3EqjLFRm2sypZP57TYYncsU51BrUitCNjJEVoUGbSp0smGDOgmwQFwf0rdUFkQE2Yw-o9TLWagmyZfL2MA4_HFZwkW5Vihs7h-1tqjaXgIqg-TIc0uEpD5ybgzCFW1_PNIGnDheC_ZPi6JZx80VB8Tf/s16000/IMG_8525.png" alt="Activa" draggable="false" />
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Honda Activa 125 DLX</h4>
+                        <p class="text-[10px] text-gray-500">01 Oct 2025</p>
+                        <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹88,377</p>
+                    </div>
+                    <!-- Box 2 -->
+                    <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
+                        <div class="prod-img-box">
+                            <img src="https://imgd.aeplcdn.com/370x208/n/8zk4f0b_1627093.jpg?q=80" alt="XUV300" draggable="false" />
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Mahindra XUV300 W4</h4>
+                        <p class="text-[10px] text-gray-500">11 Oct 2022</p>
+                        <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹7.50 Lakh*</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <!-- Action Buttons -->
+            <div class="mb-6 flex gap-4 justify-center">
+                <button id="flipBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Order</button>
+                <button id="profileBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Profile</button>
+            </div>
+        </div>
+        
+        <!-- Footer Info -->
+        <div class="text-[11px] text-gray-400 font-medium pt-4 pb-2 text-center w-full border-t border-gray-200/50">CSD Portal © 2026</div>
     </div>
-  </div>
-</div>
 
-<footer>
-  <p> © 2025 Indian Army. This is the Official Indian Army Web Portal, maintained & managed by the Indian Army. Site hosted by NIC.</p>
+    <!-- Loading Back Drop Component -->
+    <div id="loadingScreen" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex flex-col items-center justify-center">
+        <div class="bg-white p-5 rounded-xl shadow-2xl flex flex-col items-center">
+            <div class="loader mb-3"></div>
+            <p class="text-gray-700 font-semibold text-sm">Please Wait...</p>
+        </div>
+    </div>
 
- <p><a href="https://www.indianarmy.nic.in/">Back To Homepage</a></p>
-</footer>
+    <!-- Success 3D Pop-up Alert Modal -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="modal-3d bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl border border-gray-100">
+            <div class="mb-4 inline-block animate-floating">
+                <img src="https://static.vecteezy.com/system/resources/previews/048/557/610/non_2x/3d-market-basket-full-of-products-isolated-on-a-transparent-background-free-png.png" alt="CSD Status" class="w-40 h-auto" draggable="false">
+            </div>
+            <p class="text-gray-800 font-bold text-lg mb-3">Your Groceries Has Been Delivered Successfully</p>
+            <p class="text-red-600 text-xs tracking-wider mb-2">CSD ORDER ID - <span class="font-bold text-sm">GA456678GTM</span></p>
+            <p class="text-emerald-600 font-black text-2xl mt-2">Amount- ₹6296/-</p>
+            <p class="mt-2 text-gray-500 text-xs">Next Shopping Grocery Is Available On <strong>June 15th</strong></p>
+        </div>
+    </div>
 
-<script>
-  // Configurable IDs and images
-  const validIDs = {
-    defence: 'IC80129D',
-    csd: 'GA05092445831275T00'
-  };
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
 
-  // Images for front and back card sides for each type
-  const cardImages = {
-    defence: {
-      front: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjACrj2xE8xy59DaTKD5ImIeaNkf6yNRY9gAYQX8Zy-jtY7CkSoanPn0Vn8qRbp1rM4xsxFT5-zFtUX3bjmPYCmaXyiZxpF7ANPKW4QB4o_TE7rewqI95ARIyR4wE07xBaRki1aTXChdAlt9CWl-dNGLzZsR4Uuhtenb2maTBToAUz45dy0jy1V1UWw3rI/s3175/Lt.%20Col.%20A.%20K.%20Sharma%20Commanding%20Officer%20Unit%205th%20Battalion,%20Dogra%20Regiment.jpg',
-      back: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1QJIc9ATAuFBQEwVa15HPpQZLWYlDTXTSM6tEL5PsCATO449DzejDp9l2Ww326_2gt5S6_0JxVgwRCXgtiE3TmXMNapmeMhgh5XDn4pm461405bVsBwnbSHCchkNR2qzbEgK_FcFECoaqnLtpWB6Oec1Su9SuujTRBrvI9N1T5JzTqlpG34hGkMPCjNI/s3175/Lt.%20Col.%20A.%20K.%20Sharma%20Commanding%20Officer%20Unit%205th%20Battalion,%20Dogra%20Regiment.zip%20-%208.jpeg'
-    },
-    csd: {
-      front: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUcAajjbQcgbaSJdrCfcdKuxGk8LPvUTge8cvIHxdHhd_BqMaETiS03rumi9FZImLFhdbLQSy3oBwE_OmoXbDEOtKmKk1BK-dcWU5dsULBWz2RD9SH08BL9ARPf-XBl4uWnMoOEEUogZLXAhW-lJ5CUBxLXYs539nX7k1uLpidxhsPPoi03nPmt6tdcDM/s3166/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.zip%20-%207.jpeg',
-      back: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZNEkjFGNtiadvvfDpo_jpkprxUPxbhsUcD7pYrKamq4pBeFe7u-ItNP9P73iyxX7k4SH6TAblkbYBcqpOfEXpxBMc9yvTLv0PnLoqgwKiAE0dbso-DltvJYBEmhgI-cirSSCOy5es7RyQWbrNCEPjS0FEdKhshRvWrB6KWBLfCAZfxNB4dfgntxZIUmg/s3166/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.zip%20-%208.jpeg'
-    }
-  };
+            const flipInner = document.getElementById('flipCardInner');
+            const interactiveCard = document.getElementById('interactiveCard');
+            const flipBtn = document.getElementById('flipBtn');
+            const loadingScreen = document.getElementById('loadingScreen');
+            const successModal = document.getElementById('successModal');
+            let flipped = false;
 
-  const loginTypeSelect = document.getElementById('loginType');
-  const loginInput = document.getElementById('loginInput');
-  const submitBtn = document.getElementById('submitBtn');
-  const errorMsg = document.getElementById('errorMsg');
-  const loading = document.getElementById('loading');
-  const cardContainer = document.getElementById('cardContainer');
-  const flipCard = document.getElementById('flipCard');
-  const frontImage = document.getElementById('frontImage');
-  const backImage = document.getElementById('backImage');
+            // 1. प्रीलोडर टाइमर (4 सेकंड)
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.transition = 'opacity 0.5s ease';
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    document.getElementById('mainContent').classList.remove('hidden');
+                }, 500);
+            }, 4000);
 
-  // Update input placeholder on dropdown change
-  function updatePlaceholder() {
-    if(loginTypeSelect.value === 'defence') {
-      loginInput.placeholder = 'Enter DEFENCE ID';
-    } else {
-      loginInput.placeholder = 'Enter CSD SMART CARD';
-    }
-    loginInput.value = '';
-    submitBtn.style.display = 'none';
-    errorMsg.textContent = '';
-  }
+            // 2. कार्ड फ्लिप एक्शन
+            interactiveCard.addEventListener('click', toggleCardFlip);
 
-  loginTypeSelect.addEventListener('change', updatePlaceholder);
+            function toggleCardFlip() {
+                if(flipped) {
+                    flipInner.style.transform = 'rotateY(0deg)';
+                } else {
+                    flipInner.style.transform = 'rotateY(180deg)';
+                }
+                flipped = !flipped;
+            }
 
-  // Show submit button only if input matches pattern length
-  loginInput.addEventListener('input', () => {
-    const inputVal = loginInput.value.trim();
-    if(loginTypeSelect.value === 'defence' && inputVal.length > 0) {
-      submitBtn.style.display = 'block';
-    } else if(loginTypeSelect.value === 'csd' && inputVal.length > 0) {
-      submitBtn.style.display = 'block';
-    } else {
-      submitBtn.style.display = 'none';
-    }
-  });
+            // 3. Check Order बटन एक्शन
+            flipBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                loadingScreen.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    successModal.classList.remove('hidden');
+                    setTimeout(() => {
+                        successModal.classList.add('modal-active');
+                    }, 50);
+                }, 3000);
+            });
 
-  // Show error for 2 seconds
-  function showError(msg) {
-    errorMsg.textContent = msg;
-    setTimeout(() => {
-      errorMsg.textContent = '';
-    }, 2000);
-  }
+            // 4. पॉप-अप क्लोज एक्शन
+            successModal.addEventListener('click', function() {
+                successModal.classList.remove('modal-active');
+                setTimeout(() => {
+                    successModal.classList.add('hidden');
+                }, 400);
+            });
 
-  // Flip card toggle
-  flipCard.addEventListener('click', () => {
-    flipCard.classList.toggle('is-flipped');
-    let pressed = flipCard.getAttribute('aria-pressed') === 'true';
-    flipCard.setAttribute('aria-pressed', (!pressed).toString());
-  });
-  // Also allow keyboard toggle
-  flipCard.addEventListener('keypress', (e) => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      flipCard.click();
-    }
-  });
+            // Profile बटन एक्शन
+            document.getElementById('profileBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                loadingScreen.classList.remove('hidden');
+                setTimeout(() => {
+                    window.location.href = 'https://sidsmathura.github.io/csdprofile/';
+                }, 2000);
+            });
 
-  // Submit button click handler
-  submitBtn.addEventListener('click', () => {
-    const inputVal = loginInput.value.trim();
-    if(loginTypeSelect.value === 'defence') {
-      if(inputVal !== validIDs.defence) {
-        showError('Invalid DEFENCE ID');
-        return;
-      }
-    } else {
-      if(inputVal !== validIDs.csd) {
-        showError('Invalid CSD SMART CARD');
-        return;
-      }
-    }
-    // Clear error
-    errorMsg.textContent = '';
-    // Hide form elements, show loading
-    loginContainer.style.display = 'none';
-    loading.style.display = 'block';
+            // सुरक्षा स्क्रिप्ट: कॉपी और राइट क्लिक लॉक
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', (e) => e.preventDefault());
+            });
 
-    // After 3 seconds, hide loading and show card
-    setTimeout(() => {
-      loading.style.display = 'none';
-      showCard(loginTypeSelect.value);
-    }, 3000);
-  });
+            document.addEventListener('contextmenu', event => event.preventDefault());
 
-  // Download toggle state: true means next click downloads front, false means back
-  let downloadFrontNext = true;
-
-  // Create a download button and insert below the card container
-  const downloadBtn = document.createElement('button');
-  downloadBtn.id = 'downloadBtn';
-  downloadBtn.textContent = 'Download Image';
-  downloadBtn.style.marginTop = '10px';
-  downloadBtn.style.padding = '8px 16px';
-  downloadBtn.style.fontSize = '1rem';
-  downloadBtn.style.borderRadius = '4px';
-  downloadBtn.style.border = 'none';
-  downloadBtn.style.backgroundColor = '#0077cc';
-  downloadBtn.style.color = 'white';
-  downloadBtn.style.cursor = 'pointer';
-  downloadBtn.style.display = 'none'; // hide initially
-
-  cardContainer.after(downloadBtn);
-
-  // Update download button visibility based on card shown
-  function updateDownloadButtonVisibility(show) {
-      downloadBtn.style.display = show ? 'inline-block' : 'none';
-      downloadFrontNext = true; // reset to front on showing card
-  }
-
-  // Event listener for download button
-  downloadBtn.addEventListener('click', () => {
-      let imgToDownload = downloadFrontNext ? frontImage : backImage;
-      if(!imgToDownload.src) return;
-
-      // Create a temporary link to download the image
-      const link = document.createElement('a');
-
-      // Prepare a canvas to get exact image display size and content
-      const canvas = document.createElement('canvas');
-      const img = imgToDownload;
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext('2d');
-
-      try {
-        const imageObj = new Image();
-        imageObj.crossOrigin = "anonymous";
-        imageObj.onload = function() {
-          ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
-          canvas.toBlob(function(blob) {
-            const url = URL.createObjectURL(blob);
-            link.href = url;
-            link.download = (loginTypeSelect.value === 'defence' ? 'DEFENCE_ID_' : 'CSD_SMART_CARD_') + (downloadFrontNext ? 'front.jpg' : 'back.jpg');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-          }, 'image/jpeg');
-        };
-        imageObj.onerror = function() {
-          // Fallback: direct download from src
-          link.href = img.src;
-          link.download = (loginTypeSelect.value === 'defence' ? 'DEFENCE_ID_' : 'CSD_SMART_CARD_') + (downloadFrontNext ? 'front.jpg' : 'back.jpg');
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        };
-        imageObj.src = img.src;
-      } catch(e) {
-        link.href = img.src;
-        link.download = (loginTypeSelect.value === 'defence' ? 'DEFENCE_ID_' : 'CSD_SMART_CARD_') + (downloadFrontNext ? 'front.jpg' : 'back.jpg');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-
-      // Toggle for next click
-      downloadFrontNext = !downloadFrontNext;
-  });
-
-  // Show card for given login type
-  function showCard(type) {
-    cardContainer.style.display = 'block';
-    flipCard.classList.remove('is-flipped');
-    flipCard.setAttribute('aria-pressed', 'false');
-    frontImage.src = cardImages[type].front;
-    backImage.src = cardImages[type].back;
-    updateDownloadButtonVisibility(true);
-  }
-
-  // Disable right click, context menu to prevent saving etc.
-  window.addEventListener('contextmenu', e => e.preventDefault());
-
-  // Disable keyboard shortcuts Ctrl+U, Ctrl+S, Ctrl+Shift+I
-  window.addEventListener('keydown', function (e) {
-    if ((e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))) {
-      e.preventDefault();
-    }
-  });
-
-  // Disable copy, cut, paste events globally
-  document.addEventListener('copy', e => e.preventDefault());
-  document.addEventListener('cut', e => e.preventDefault());
-  document.addEventListener('paste', e => e.preventDefault());
-
-  // Prevent zoom on Ctrl+ scroll or pinch
-  document.addEventListener('wheel', function(e){
-    if(e.ctrlKey) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-  document.addEventListener('touchmove', function(e){
-    if(e.scale !== 1) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  // Make screenshots black by covering all with a black overlay on print and screenshot
-  function addBlackOverlay(){
-    let overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = 0; overlay.style.left = 0;
-    overlay.style.width = '100vw'; overlay.style.height = '100vh';
-    overlay.style.backgroundColor = 'black';
-    overlay.style.zIndex = 999999;
-    overlay.style.pointerEvents = 'none';
-    document.body.appendChild(overlay);
-    setTimeout(() => { document.body.removeChild(overlay); }, 1000);
-  }
-  document.addEventListener('keydown', e => {
-    // Detect PrintScreen key (PrtSc)
-    if(e.key === 'PrintScreen' || e.key === 'Snapshot' || e.keyCode === 44){
-      addBlackOverlay();
-    }
-  });
-
-  // No zoom by meta or ctrl
-  window.addEventListener('keydown', function(e){
-    if((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '_')){
-      e.preventDefault();
-    }
-  });
-
-
-  // Initialize placeholder
-  updatePlaceholder();
-</script>
-
+            document.addEventListener('keydown', function(e) {
+                if (
+                    e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+                    (e.ctrlKey && e.keyCode === 85) || 
+                    (e.ctrlKey && e.keyCode === 83)
+                ) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
