@@ -7,51 +7,25 @@
     
     <title>My App</title>
 
-    <!-- 1. होम स्क्रीन आइकॉन (यहाँ अपने आइकॉन का सही रास्ता/पाथ डालें) -->
+    <!-- 1. होम स्क्रीन आइकॉन -->
     <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7RS7zcB8TGw-MgsLxKTioY8R_Jl7HlQfpf_Hc0YF5MO3sITN2CVb-IooeoIHlNkGKDxBckN9egW4JdKA3UpFifue8JTVL0k6wzpzfF8etVXlrt81N6e8QkVJ_gMBCyZK5M0HeSvWEo9xPtJ9X1B4sU3BRGRZVcGL28jlaK1DZ_UcGhVrcIhSeaEsASlJj/s1024/IMG_5863.png">
-    <!-- अलग-अलग iPhone साइज़ के लिए (वैकल्पिक लेकिन बेहतर प्रदर्शन के लिए) -->
     <link rel="apple-touch-icon" sizes="152x152" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7RS7zcB8TGw-MgsLxKTioY8R_Jl7HlQfpf_Hc0YF5MO3sITN2CVb-IooeoIHlNkGKDxBckN9egW4JdKA3UpFifue8JTVL0k6wzpzfF8etVXlrt81N6e8QkVJ_gMBCyZK5M0HeSvWEo9xPtJ9X1B4sU3BRGRZVcGL28jlaK1DZ_UcGhVrcIhSeaEsASlJj/s1024/IMG_5863.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7RS7zcB8TGw-MgsLxKTioY8R_Jl7HlQfpf_Hc0YF5MO3sITN2CVb-IooeoIHlNkGKDxBckN9egW4JdKA3UpFifue8JTVL0k6wzpzfF8etVXlrt81N6e8QkVJ_gMBCyZK5M0HeSvWEo9xPtJ9X1B4sU3BRGRZVcGL28jlaK1DZ_UcGhVrcIhSeaEsASlJj/s1024/IMG_5863.png">
 
-    <!-- 2. वेबसाइट को ऐप की तरह फुल स्क्रीन में खोलने के लिए (यूआरएल बार छिप जाएगी) -->
+    <!-- 2. वेबसाइट को ऐप की तरह फुल स्क्रीन में खोलने के लिए -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     
-    <!-- 3. ऊपर की स्टेटस बार (बैटरी/नेटवर्क वाली पट्टी) को ट्रांसपेरेंट करने के लिए ताकि ऐप फुल स्क्रीन दिखे -->
+    <!-- 3. ऊपर की स्टेटस बार को ट्रांसपेरेंट करने के लिए -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- 4. होम स्क्रीन पर ऐप का क्या नाम दिखेगा -->
+    <!-- 4. होम स्क्रीन पर ऐप का नाम -->
     <meta name="apple-mobile-web-app-title" content="My App Name">
 
-    <!-- 5. ज़ीरो मार्जिन और फुल स्क्रीन के लिए CSS -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            background-color: #ffffff; /* अपनी पसंद का बैकग्राउंड कलर डालें */
-            /* iPhone के नॉच (Notch) के अंदर कंटेंट को न घुसने देने के लिए पैडिंग (यदि ज़रूरत हो) */
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-        }
-    </style>
-</head>
-<body>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>CSD ID Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         /* सुरक्षा: टेक्स्ट सिलेक्शन और कॉपी रोकना */
         * {
@@ -60,17 +34,20 @@
             -ms-user-select: none;
             user-select: none;
             -webkit-touch-callout: none;
-        }
-
-        /* स्क्रॉलिंग इनेबल करने के लिए सेटिंग्स */
-        html, body {
             margin: 0;
             padding: 0;
-            min-height: 100%;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
             overflow-x: hidden;
-            overflow-y: auto; /* नीचे की तरफ स्क्रॉलिंग चालू की गई */
+            overflow-y: auto;
             background-color: #f3f4f6;
             scroll-behavior: smooth;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         /* Card 3D Setup */
@@ -108,7 +85,7 @@
             transform: rotateY(180deg);
         }
 
-        /* प्रीलोडर: फिक्स्ड ओवरले */
+        /* प्रीलोडर */
         #preloader {
             position: fixed;
             top: 0;
@@ -120,12 +97,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
         }
 
-        /* बड़ा लोगो और 3D एनीमेशन */
         .preloader-logo-wrap {
             position: relative;
             width: 260px;
@@ -142,24 +115,8 @@
             position: relative;
             z-index: 2;
             animation: assembleLogo 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
         }
 
-        /* ग्लो इफेक्ट */
-        .preloader-logo-wrap::before {
-            content: '';
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            background: rgba(212, 175, 55, 0.8);
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: 1;
-            opacity: 0;
-            animation: softGlow 3.5s ease-in-out forwards;
-        }
-
-        /* चमक (Shining) इफेक्ट */
         .shine-layer {
             position: absolute;
             top: 0;
@@ -182,42 +139,20 @@
             left: -100%;
             width: 40%;
             height: 200%;
-            background: linear-gradient(
-                to right, 
-                rgba(255, 255, 255, 0) 0%, 
-                rgba(255, 255, 255, 0.9) 50%, 
-                rgba(255, 255, 255, 0) 100%
-            );
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0) 100%);
             transform: rotate(30deg);
             animation: shineEffect 1.5s ease-in-out infinite;
             animation-delay: 1.5s;
         }
 
         @keyframes assembleLogo {
-            0% {
-                transform: scale(0.2) rotateX(70deg) rotateY(100deg);
-                opacity: 0;
-                filter: blur(8px);
-            }
-            100% {
-                transform: scale(1) rotateX(0deg) rotateY(0deg);
-                opacity: 1;
-                filter: blur(0);
-            }
+            0% { transform: scale(0.2) rotateX(70deg) rotateY(100deg); opacity: 0; filter: blur(8px); }
+            100% { transform: scale(1) rotateX(0deg) rotateY(0deg); opacity: 1; filter: blur(0); }
         }
 
-        @keyframes softGlow {
-            0% { opacity: 0; transform: scale(0.5); }
-            30% { opacity: 1; transform: scale(1.1); filter: blur(30px); }
-            70% { opacity: 0.8; transform: scale(1); filter: blur(45px); }
-            100% { opacity: 0.1; transform: scale(0.9); filter: blur(60px); }
-        }
+        @keyframes shineEffect { 100% { left: 140%; } }
 
-        @keyframes shineEffect {
-            100% { left: 140%; }
-        }
-
-        /* उत्पाद इमेज का निश्चित और समान आकार */
+        /* उत्पाद इमेज का आकार */
         .prod-img-box {
             width: 160px;
             height: 100px;
@@ -249,104 +184,457 @@
             width: 44px;
             height: 44px;
             animation: spin 1s linear infinite;
+            margin: auto;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
+        .animate-floating { animation: floating 3s ease-in-out infinite; }
 
-        .animate-floating {
-            animation: floating 3s ease-in-out infinite;
+        /* CURRENT URC */
+        .custom-urc-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        .custom-location-icon { color: red; font-size: 9px; }
+        .custom-current-text { color: red; }
+        .custom-urc-name { color: #000; }
+
+        /* URC POPUP */
+        .custom-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.88);
+            z-index: 999999;
+        }
+        .custom-popup img {
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
         }
 
-/* ===== CURRENT URC ===== */
+        /* HORIZONTAL SLIDER */
+        .header-slider-container {
+            width: 240px;
+            height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0.375rem;
+        }
+        .header-slider-wrapper {
+            display: flex;
+            width: 400%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .header-slide { width: 25%; flex-shrink: 0; }
+        .header-slide img { width: 100%; height: auto; object-fit: contain; display: block; }
 
-.custom-urc-box{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    width:fit-content;
-    cursor:pointer;
-    user-select:none;
-    font-family:Arial, sans-serif;
-    font-size:10px;
-    font-weight:bold;
-}
+        /* === डॉक्टर स्लाइडर कंटेनर स्टाइल === */
+        #slide-notification {
+            position: fixed !important;
+            bottom: -280px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 92% !important;
+            max-width: 420px !important;
+            background: #cf1d1d !important;
+            border-radius: 18px !important;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.3), 0 4px 15px rgba(0,0,0,0.2) !important;
+            z-index: 999999 !important;
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            overflow: visible !important;
+            display: block !important;
+            padding: 16px 18px !important;
+        }
 
-/* Location Icon */
-.custom-location-icon{
-    color:red;
-    font-size:9px;
-}
+        #slide-notification.show {
+            bottom: 24px !important;
+        }
 
-/* CURRENT TEXT */
-.custom-current-text{
-    color:red;
-}
+        .banner-wrapper {
+            display: flex !important;
+            width: 100% !important;
+            position: relative !important;
+            align-items: flex-end !important;
+        }
 
-/* URC Name */
-.custom-urc-name{
-    color:#000;
-}
+        .banner-content {
+            width: 60% !important;
+            color: #ffffff !important;
+            z-index: 2 !important;
+            text-align: left !important;
+        }
 
-/* ===== POPUP ===== */
+        .banner-content h1 {
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            margin-bottom: 4px !important;
+            color: #ffffff !important;
+            text-transform: capitalize !important;
+        }
 
-.custom-popup{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,0.88);
-    z-index:999999;
-}
+        .banner-content p {
+            font-size: 9px !important;
+            line-height: 1.3 !important;
+            margin-bottom: 8px !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            color: #f1f1f1 !important;
+            opacity: 0.9 !important;
+            text-transform: none !important;
+        }
 
-/* Popup Image */
-.custom-popup img{
-    width:90%;
-    max-width:1000px;
-    max-height:90%;
-    object-fit:contain;
-    border-radius:12px;
-}
+        .banner-bottom-text {
+            color: #ffd84a !important;
+            font-size: 10px !important;
+            font-weight: 800 !important;
+            line-height: 1.2 !important;
+            text-transform: uppercase !important;
+        }
 
-/* HORIZONTAL SLIDER FOR HEADER IMAGE */
-.header-slider-container {
-    width: 240px;
-    height: auto;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-    border-radius: 0.375rem;
-}
-.header-slider-wrapper {
-    display: flex;
-    width: 400%;
-    transition: transform 0.5s ease-in-out;
-}
-.header-slide {
-    width: 25%;
-    flex-shrink: 0;
-}
-.header-slide img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-}
+        .banner-image-box {
+            position: absolute !important;
+            right: -21px !important;
+            bottom: -16px !important;
+            height: 150px !important;
+            z-index: 1 !important;
+            display: flex !important;
+            align-items: flex-end !important;
+        }
 
+        .banner-image-box img {
+            height: 130% !important;
+            object-fit: contain !important;
+            display: block;
+        }
+
+        /* ========================================================= */
+        /* === यहाँ से आपके CANTEEN SMART CARD प्रोफाइल की स्टाइल है === */
+        /* ========================================================= */
+        #blackout {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000000;
+            z-index: 99999;
+            display: none;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-3d-wrap {
+            width: 98vw;
+            max-width: 420px;
+            perspective: 1500px;
+            margin: 30px auto;
+            box-shadow: 0 4px 24px rgba(71, 60, 139, 0.15);
+            border-radius: 24px;
+            background: #e5e4f3;
+            position: relative;
+        }
+
+        .card-3d-profile {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: box-shadow 0.25s;
+            box-shadow: 0 8px 32px rgba(60,30,200,0.08);
+            position: relative;
+        }
+
+        .top-row-profile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px 0px 18px;
+        }
+
+        /* --- लेफ्ट स्लाइडर कंटेनर --- */
+        .left-mini-slider {
+            width: 95px;
+            height: 34px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            border: 1.5px solid #dcdee0;
+            box-shadow: 1px 1px 9px rgba(20,60,150,0.09);
+        }
+        
+        .left-slider-wrapper {
+            display: flex;
+            width: 200%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* --- राइट स्लाइडर कंटेनर --- */
+        .right-mini-slider {
+            width: 95px;
+            height: 34px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            border: 1.5px solid #dcdee0;
+            box-shadow: 1px 1px 9px rgba(20,60,150,0.09);
+        }
+
+        .right-slider-wrapper {
+            display: flex;
+            width: 200%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .mini-table-profile-cell {
+            width: 50%;
+            height: 100%;
+            flex-shrink: 0;
+            background: #ebf4fb;
+            font-size: 11px;
+            color: #0a2639;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 0 4px;
+        }
+
+        /* इमेज साइज़िंग सुरक्षा नियम - चित्र चाहे कितना भी बड़ा हो, इसी छोटे फ्रेम में परफेक्ट फिट रहेगा */
+        .mini-table-profile-cell img {
+            width: 16px !important;
+            height: 12px !important;
+            object-fit: contain !important;
+            flex-shrink: 0;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title-3d-profile {
+            text-align: center;
+            font-size: 1.35em;
+            font-weight: bold;
+            color: #1d267c;
+            margin: 10px 0 2px 0;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px #eaeaea;
+        }
+
+        .subtitle-3d-profile {
+            text-align: center;
+            color: #cb338d;
+            font-size: 14px;
+        }
+
+        .profile-img-card {
+            width: 110px;
+            height: 110px;
+            border-radius: 22px;
+            margin: 16px auto 0 auto;
+            box-shadow: 0 8px 24px 0 rgba(35, 84, 129, 0.14);
+            display: block;
+            object-fit: cover;
+            border: 2.2px solid #f5f7fa;
+            background: #eee;
+            pointer-events: none;
+        }
+
+        .canteen-table-profile {
+            margin: 12px auto 8px auto;
+            width: 94%;
+            background: #fcfcfd;
+            border-radius: 20px;
+            box-shadow: 0 2px 13px rgba(47,128,237,0.13);
+            overflow: hidden;
+            border: 1.5px solid #ebeef6;
+            font-size: 15px;
+        }
+
+        .canteen-table-profile td {
+            padding: 8px 7px;
+            border-bottom: 1px solid #ebebeb;
+            color: #1d253c;
+            text-align: left;
+        }
+
+        .canteen-table-profile td:first-child {
+            font-weight: bold;
+            color: #2b388c;
+            width: 44%;
+        }
+
+        .canteen-table-profile tr:last-child td {
+            border-bottom: none;
+        }
+
+        .signature-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 18px auto 3px auto;
+            background: #f2f6fd;
+            border-radius: 12px;
+            padding: 8px 12px;
+            box-shadow: 2px 2px 10px #bec9f3a0;
+            border: 1px solid #e3e8f1;
+            width: fit-content;
+        }
+
+        .signature-img {
+            width: 65px;
+            height: 25px;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .signature-title {
+            font-size: 13px;
+            color: #727375;
+            font-style: italic;
+        }
+
+        .check-btn-profile {
+            background: #3846df;
+            color: white;
+            font-size: 13px;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .check-btn-profile:hover {
+            background: #2835b8;
+        }
+
+        .disclaimer-box {
+            font-size: 12px;
+            background: #e2e8f8;
+            color: #832031;
+            margin: 12px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            line-height: 1.6;
+            box-shadow: 1px 1.5px 8px #d8dbee59;
+            text-align: left;
+        }
+
+        .balance-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #f9fbff;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 24px;
+            z-index: 10;
+        }
+
+        /* --- पिन बक्से और इनपुट स्टाइल --- */
+        .pin-boxes { display: flex; justify-content: center; gap: 6px; margin-top: 15px;}
+        .pin-boxes input {
+            width: 38px !important; 
+            height: 46px !important; 
+            text-align: center;
+            font-size: 24px; 
+            border-radius: 10px; 
+            border: 2px solid #b3c5f5; 
+            outline: none;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        .pin-boxes input:focus {
+            border-color: #2d3ae0;
+            box-shadow: 0 0 8px rgba(45, 58, 224, 0.25);
+        }
+
+        .pin-btn {
+            background: #2d3ae0; color: #fff; border: none; border-radius: 10px;
+            padding: 10px 28px; margin-top: 24px; font-size: 16px; cursor: pointer; transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .error-popup, .result-popup, .loading-popup, .tick-popup {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            border-radius: 24px;
+            z-index: 20;
+        }
+
+        .error-box, .result-box, .loading-box, .tick-box {
+            background: #fff; border-radius: 16px; padding: 24px; text-align: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2); width: 85%; max-w: 300px; animation: popIn 0.4s ease;
+        }
+
+        .error-box { color: #e50914; font-weight: bold; font-size: 18px; }
+        
+        /* --- लिमिट रिज़ल्ट टेक्स्ट स्टाइल --- */
+        .result-box { 
+            color: #1a1a1a; 
+            font-size: 15px; 
+            line-height: 1.8; 
+            text-align: center; 
+            width: 90%;
+            padding: 20px 15px;
+        }
+        .limit-item-box {
+            background: #f4f6fc;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #e1e6f5;
+        }
+        .limit-title-text {
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            color: #444444 !important;
+            letter-spacing: 0.5px;
+        }
+        .limit-amount-text {
+            font-size: 20px !important;
+            font-weight: 900 !important;
+            margin-top: 2px;
+        }
+
+        .done-btn { margin-top: 15px; background: #3846df; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 14px; cursor: pointer; font-weight: bold;}
+        .profile-loader { border: 4px solid #f3f3f3; border-top: 4px solid #3846df; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: auto; }
+        .tick-gif { width: 300px; height: 220px; object-fit: contain; margin: auto; pointer-events: none; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-start select-none" oncontextmenu="return false;">
+
+    <!-- प्रोटेक्शन स्क्रीन -->
+    <div id="blackout">SCREENSHOT PROHIBITED</div>
 
     <!-- Preloader -->
     <div id="preloader">
@@ -356,26 +644,22 @@
         </div>
     </div>
 
-    <!-- Main Wrapper -->
-    <div class="w-full min-h-screen flex flex-col items-center justify-between py-6 px-4 box-border">
+    <!-- Main Wrapper (Portal Home Screen) -->
+    <div id="portalHomeScreen" class="w-full min-h-screen flex flex-col items-center justify-between py-6 px-4 box-border">
         
         <!-- बड़ा हेडर लोगो (स्लाइडर के साथ) -->
         <div class="w-full text-center mt-0 pt-0 mb-4">
             <div class="header-slider-container drop-shadow-md">
                 <div class="header-slider-wrapper" id="headerSliderWrapper">
-                    <!-- चित्र 1 -->
                     <div class="header-slide">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhH57w_pr8AQ5sVOUrTpNGRlqgIz_c0-VamdskCSReVls8Xavxe1ks4Fz7-yWh5p2SNglU364v2eTr9HwDCffwcbsopnp0KNVntt-dfwcgCfNLPxrzKC4g2vMnCmHkqFlESNwPGZvvANSPgvC7LlDg1F8WlyzQur1wqFk6udeG6_EADUqsCtX4Hmne5AwKe/s1100/CANTEEN%20-%207.jpeg" alt="CSD Header Logo 1" draggable="false">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ8gyGHE90pYpSPi0xBXo19t9W_kmD5LQxUTYZdHm8oCAdRp9hyphenhyphenjdMksTMqmFle7y9qttTk5bUC4jyPLEVRvS_BJ4QHNDlItws5wConEH8A59nJp99HuL_3hlrOe-VUoQNEYh5QUxwTnu9U9VhuOJFu5JzL7gGHoHTBz-S7suBxB3JjtyQgWIG9aIYU0hN/s1100/CANTEEN%20-%207.jpeg" alt="CSD Header Logo 1" draggable="false">
                     </div>
-                    <!-- चित्र 2 -->
                     <div class="header-slide">
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDQkuamaPD1eYTxSz795h_4GLwAwNbnGeHJM0EO3S94gIx8CPchVXzZHWx53-YDjGPKzAgdvgHn1dLCD_T0hOnRLJqwRAKeinhKb-wU-henB-peDjFkwjLz5-v8QEgwmOQcmQDJs0MsCSwlZvx8zWh3-7Zl35SWV8R9DgRWXpidOEQvKrOh7WxPLOB1bTy/s1100/CANTEEN%20-%208.jpeg" alt="CSD Header Logo 2" draggable="false">
                     </div>
-                    <!-- चित्र 3 -->
                     <div class="header-slide">
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6xpz_y9UgmfWcYLUW5YW7F2YLBafkwcyLUQ4bmZhu9xL3K4k0YMumEvNrM5M_FQlJnHm-O7vQ3c6kQGbwaOcPJo3s6hGqZWa8TGgZVUSOquvTln9Fc4SE6cBNReQXIHrtXoBuHT-OoC2_q947K-dMHNHpVXZdAxvaTcYi73TkcLqv1U3n9uU3KY0eFSdL/s1100/CANTEEN%20-%209.jpeg" alt="CSD Header Logo 3" draggable="false">
                     </div>
-                    <!-- चित्र 4 -->
                     <div class="header-slide">
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEggStfwhn33dI_bLv9loXPceU74MSHY9CnMGOUE4p_DFfHlOlqXkM-XbgQcMmLDrxZrAK-DDxlh2_EJBlS7sxO_W8tSPNaBpkQnesQ9N5TToJivPLu4Cv_2-KvmdsHcEsAMmBnGpPsgwAOiRlPdK2FA481BQE7SSrkRZv_9Q1y3SrkEy25QBtsFt937TDaQ/s1100/CANTEEN%20-%2010.jpeg" alt="CSD Header Logo 4" draggable="false">
                     </div>
@@ -390,41 +674,36 @@
                 <div id="flipCardInner" class="flip-card-inner">
                     <!-- Front View -->
                     <div class="flip-card-front">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAVH_PBkkNGf5WPJ-m76cuw9Ww-skMaO-ubHGH1Ub-ACgp8HSL-2d_8SJtlwYgp-uQl078kdVtVX95Wb1jMEuGfKzn2C2E3RbtSbXXrOWW9OgiVLP8qQto1lfIRwgq3Pen7BDyqeL8kdrZ9o7GTzTJZrjp_Je9v6Chh0NM4vMTuW8BoLv5MnJEtEBW4RlH/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.jpeg" alt="Card Front" draggable="false" />
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAVH_PBkkNGf5WPJ-m76cuw9Ww-skMaO-ubHGH1Ub-ACgp8HSL-2d_8SJtlwYgp-uQl078kdVtVX95Wb1jMEuGfKzn2C2E3RbtSbXXrOWW9OgiVLP8qQto1lfIRwgq3Pen7BDyqeL8kdrZ9o7GTzTJZrjp_Je9v6Chh0NM4vMTuW8BoLv5MnJEtEBW4RlH/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8S%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.jpeg" alt="Card Front" draggable="false" />
                     </div>
                     <!-- Back View -->
                     <div class="flip-card-back">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-lsiN1HOXb97ZhI-49vA2z8NYYYhJN_jWZGodHuFRziKNTO-uuciSKDdnqxjJC6lD0PCWNwCir5K3l206DaH5C4D5vccs-XyjP4VKSlKTpPup_8GuOz7z-dGGkKXQhjWPITT_ffvaehQnVAGb7ZZJX3cUDi93_JFGuwLUhA_hSCo6HYDeVNz2AB0Le00k/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1%20-%204.jpeg" alt="Card Back" draggable="false" />
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-lsiN1HOXb97ZhI-49vA2z8NYYYhJN_jWZGodHuFRziKNTO-uuciSKDdnqxjJC6lD0PCWNwCir5K3l206DaH5C4D5vccs-XyjP4VKSlKTpPup_8GuOz7z-dGGkKXQhjWPITT_ffvaehQnVAGb7ZZJX3cUDi93_JFGuwLUhA_hSCo6HYDeVNz2AB0Le00k/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8S%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1%20-%204.jpeg" alt="Card Back" draggable="false" />
                     </div>
                 </div>
             </div>
 
+            <!-- Current URC -->
+            <div class="custom-urc-box mt-2" onclick="openCustomURCPopup()">
+                <i class="fa-solid fa-location-dot custom-location-icon"></i>
+                <span class="custom-current-text">CURRENT URC -</span>
+                <span class="custom-urc-name">Mathura Cantt URC Canteen</span>
+            </div>
 
-<br/>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+            <!-- Popup -->
+            <div class="custom-popup" id="customPopup" onclick="closeCustomURCPopup()">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixwl9VXYvznJJ02WuWAIcboDCBdUkdVo60MblLSioRAr0DXcm_H5fQad5v5-0SvIHe_QIuwEVsTMQhG_jwvNCa6lKDsSf1Xkb1yvw7Dp-WJm62XQBkdwXi_V_6lo7zYpZ2W4zdPaHZoC5cGy2POJdAbGv28bF30JsFVrxwGlt929xOc_9npg_d-089jhwV/s1254/A39EB5E2-4F13-466D-8D0A-4FA5E11C1922.png" alt="URC Image">
+            </div>
 
-<!-- Current URC -->
-<div class="custom-urc-box" onclick="openCustomURCPopup()">
-    <i class="fa-solid fa-location-dot custom-location-icon"></i>
-    <span class="custom-current-text">CURRENT URC -</span>
-    <span class="custom-urc-name">Mathura Cantt URC Canteen</span>
-</div>
+            <div class="w-full bg-white rounded-xl shadow-md p-4 mt-2">
+                <h2 class="text-xl font-bold text-gray-800 mb-2"><i class="fa-solid fa-bullhorn text-red-500 mr-2"></i>Notice</h2>
+                <p class="text-xs text-gray-700 leading-relaxed">You are informed that your <strong class="text-black">Canteen Liquor Card / Liquor Quota</strong> is currently <strong class="text-red-600">Inactive.</strong> Therefore, you will not be eligible for the monthly limit of 10 bottles. To reactivate the quota, kindly contact the concerned Army Headquarters or inform your station Adjutant and complete the required form process.</p>
+            </div>
 
-<!-- Popup -->
-<div class="custom-popup" id="customPopup" onclick="closeCustomURCPopup()">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixwl9VXYvznJJ02WuWAIcboDCBdUkdVo60MblLSioRAr0DXcm_H5fQad5v5-0SvIHe_QIuwEVsTMQhG_jwvNCa6lKDsSf1Xkb1yvw7Dp-WJm62XQBkdwXi_V_6lo7zYpZ2W4zdPaHZoC5cGy2POJdAbGv28bF30JsFVrxwGlt929xOc_9npg_d-089jhwV/s1254/A39EB5E2-4F13-466D-8D0A-4FA5E11C1922.png" alt="URC Image">
-</div>
-
-<h2 style="font-size:30px;"><strong> Notice </strong> </h2>
-<p style="color:black;"> You are informed that your <strong style="color:black;"> Canteen Liquor Card / Liquor Quota </strong> is currently <strong style="color:black;"> Inactive.</strong>Therefore, you will not be eligible for the monthly limit of 10 bottles.
-To reactivate the quota, kindly contact the concerned Army Headquarters or inform your station Adjutant and complete the required form process.</p>
-
-            <!-- Purchase CSD Box 1 -->
+            <!-- Products Boxes -->
             <div class="w-full bg-white rounded-xl shadow-md p-4">
                 <h3 class="text-center text-xl font-bold mb-4 text-gray-800 tracking-wide">Purchase AFD <br/>(Against Firm Demand) </h3>
                 <div class="flex gap-4 justify-center">
-                    <!-- Box 1 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGjJ1i_2IUbFF98shfF-U-iXzOxlaOz2qisI9X5gtqbRI6JSivVv4f0AT3V71urj9mZ4WkHeVLAql8EltbeYmVLGnd44AGj9xW3oQfx5JCCswbPKG97sys1UiLeN3kGe9v_B_bqWBi2EPB9dmZbMM_SwfVbkSTjKml2zeM11p3tDYw9w7y-5lbMRhjq08B/s1100/Untitled%20design%20-%206.jpeg" alt="Activa" draggable="false" />
@@ -433,7 +712,6 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
                         <p class="text-[10px] text-gray-500">01 Oct 2025</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹88,377</p>
                     </div>
-                    <!-- Box 2 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://imgd.aeplcdn.com/370x208/n/8zk4f0b_1627093.jpg?q=80" alt="XUV300" draggable="false" />
@@ -445,35 +723,30 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
                 </div>
             </div>
 
-            <!-- Purchase CSD Box 2 -->
             <div class="w-full bg-white rounded-xl shadow-md p-4">
                 <h3 class="text-center text-xl font-bold mb-4 text-gray-800 tracking-wide">Purchase CSD <br/>(Canteen Stores Department)</h3>
                 <div class="flex gap-4 justify-center">
-                    <!-- Box 1 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://www.lg.com/content/dam/channel/wcms/in/images/washing-machines/p8030sraz_abgqeil_eail_in_c/gallery/P8030SRAZ-Washing-Machines-Front-View-D-01-v1.jpg" alt="Activa" draggable="false" />
                         </div>
-                        <h4 class="font-bold text-xs text-gray-700 truncate">LG 8Kg Sami Automatic Washing Machine </h4>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">LG 8Kg Semi Automatic</h4>
                         <p class="text-[10px] text-gray-500">19 Sep 2022</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹5,300*</p>
                     </div>
-                    <!-- Box 2 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnXcnH-dkhn8nb1YTRbcdi1jfccBfymodkiLe7iRUT6aIS-3R8VQ7nlUMyufHbyJAwn3Jm-rRuwMFExwDxBbEu37W0Ru3AfhZD2K2UJ7x7wtnCROiI5viNJiDQqP3n2T6K4MNg-1oB_8aKLmPUIIl9K-qGBbVnLs5x_FWEk8vFxxJSV1N8KRUuVsPxigFd/s1100/Untitled%20design%20-%203.jpeg" alt="XUV300" draggable="false" />
                         </div>
-                        <h4 class="font-bold text-xs text-gray-700 truncate"> Whirlpool Double Door Refrigerator</h4>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Whirlpool Double Door</h4>
                         <p class="text-[10px] text-gray-500">06 July 2023</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹18,400*</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Purchase CSD Box 3 -->
             <div class="w-full bg-white rounded-xl shadow-md p-4">
                 <div class="flex gap-4 justify-center">
-                    <!-- Box 1 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjV9PALBnRm-1liOgg_3XEK_aW1cbc42Im8mTTg-AxpV1D552aISSsAbs2FwpLgNJD3BETThoIlbBYFYxgV1_5NrubwxkeZ5H9L8RQxPKBqt77yhCCosMlRW243yo8jWDi6ovNik9EVa1xwv5krLvyl91KAmgFsro9n8fuVBIVzvThr_dy3l-fa9PqdDR3N/s1100/Untitled%20design%20-%202.jpeg" alt="Activa" draggable="false" />
@@ -482,36 +755,32 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
                         <p class="text-[10px] text-gray-500">28 July 2024</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹4,700*</p>
                     </div>
-                    <!-- Box 2 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjduIE7UNS8BVBw_UBpUACG5_hZ6lQqGg4rfaN0z-6jfLj-G7Bf4qKazhZ-qFm8QFhniSaei3KefdhbHwgoby_acgZEhPYsUN9DsIvJhCq45y27cCInyhYm1cuw8bCP4HwBulXGrboW9d1mgcFRDk_0aoqQmMXkUmfpn2qsfiOJYoRkV9MHisnJ1Fm37w54/s1100/Untitled%20design%20-%201.jpeg" alt="XUV300" draggable="false" />
                         </div>
-                        <h4 class="font-bold text-xs text-gray-700 truncate"> LG LED 32 Inch TV | LM5500 </h4>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">LG LED 32 Inch TV</h4>
                         <p class="text-[10px] text-gray-500">15 Nov 2024</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹ 34,580*</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Purchase CSD Box 4 -->
             <div class="w-full bg-white rounded-xl shadow-md p-4">
                 <div class="flex gap-4 justify-center">
-                    <!-- Box 1 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhl1oNgZpv6_q03un72HlkfM0TCcADFOCJloW4soguYQYu6GD-TQcVinpto3EjjCf3AEPDxGGp2T95Uu79LZ__aNrjrgN3218RM1V8bf6IlzuZeRxKbjNatbu1DgnkRG5xCcMJkUPa0vy2rm4gFceNjEm8q6cevqrp71BZfxZ0CYNXGUcRcVR3BVg_n1_e-/s1100/Untitled%20design%20-%204.jpeg" alt="Activa" draggable="false" />
                         </div>
-                        <h4 class="font-bold text-xs text-gray-700 truncate"> Royaloak Amber Fabric Sofa 3 Seater </h4>
-                        <p class="text-[10px] text-gray-500">20 August 2025</p>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Royaloak Sofa 3 Seater</h4>
+                        <p class="text-[10px] text-gray-500">20 Aug 2025</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹48,400*</p>
                     </div>
-                    <!-- Box 2 -->
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
                         <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVOJRMTmxd6rJkbCyY4sSP9F6A5MCM1U0v1vSrnckD6cJyQkEcVwyMsr3moHrye8gvqxRKV_HNaOSs8bfJGeCS8N4RJr9Tt6L5thgQ66pS274VsYw8VlNSK0-O-BORCq_RoUH87K1lDy0rR6H9CeXeFrMw7gmj8WwNKIGLJaTwr2oOkOgiKenxjQ3duBhc/s1100/Untitled%20design%20-%205.jpeg" alt="XUV300" draggable="false" />
                         </div>
-                        <h4 class="font-bold text-xs text-gray-700 truncate">Apple iPhone 16 (Ultramarine, 128 GB) </h4>
+                        <h4 class="font-bold text-xs text-gray-700 truncate">Apple iPhone 16 128GB</h4>
                         <p class="text-[10px] text-gray-500">15 Nov 2024</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹ 50,100*</p>
                     </div>
@@ -519,21 +788,144 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
             </div>
 
             <!-- Action Buttons -->
-            <div class="mb-6 flex gap-4 justify-center">
+            <div class="mb-12 flex gap-4 justify-center">
                 <button id="flipBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Order</button>
                 <button id="profileBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Profile</button>
             </div>
         </div>
         
         <!-- Footer Info -->
-        <div class="text-[11px] text-gray-400 font-medium pt-4 pb-2 text-center w-full border-t border-gray-200/50">CSD Portal © 2026</div>
+        <div class="text-[11px] text-gray-400 font-medium pt-4 pb-2 text-center w-full border-t border-gray-200/50"> © Indian Armed Forces CSD Portal 2026</div>
+    </div>
+
+
+    <!-- ========================================================== -->
+    <!-- === यहाँ से आपका इन-लाइन लोड होने वाला प्रोफाइल सेक्शन है === -->
+    <!-- ========================================================== -->
+    <div id="canteenCardProfileScreen" class="hidden w-full min-h-screen flex items-center justify-center py-6 px-2 box-border">
+        <div class="card-3d-wrap">
+            <div class="card-3d-profile" id="homeCard">
+              
+              <!-- ऊपर के दोनों लेफ्ट और राइट इमेज स्लाइडर (आइकॉन और नाम अब एक साथ स्लाइड होंगे) -->
+              <div class="top-row-profile">
+                <!-- लेफ्ट छोटा स्लाइडर -->
+                <div class="left-mini-slider">
+                    <div class="left-slider-wrapper" id="leftMiniSliderWrapper">
+                        <div class="mini-table-profile-cell">
+                            <img src="https://flagcdn.com/w20/in.png" alt="icon" draggable="false">SERVING
+                        </div>
+                        <div class="mini-table-profile-cell">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Flag_of_Indian_Army.svg/3840px-Flag_of_Indian_Army.svg.png" alt="icon" draggable="false">ARMY
+                        </div>
+                    </div>
+                </div>
+
+                <!-- राइट छोटा स्लाइडर -->
+                <div class="right-mini-slider">
+                    <div class="right-slider-wrapper" id="rightMiniSliderWrapper">
+                        <div class="mini-table-profile-cell">
+                            <img src="https://www.pngmart.com/files/7/Grocery-PNG-Clipart.png" alt="icon" draggable="false">GROCERY
+                        </div>
+                        <div class="mini-table-profile-cell">
+                            <img src="https://www.thedailymeal.com/img/gallery/14-liqueurs-to-keep-stocked-in-your-home-bar/l-intro-1682608205.jpg" alt="icon" draggable="false">LIQUOR
+                        </div>
+                    </div>
+                </div>
+              </div>
+        
+              <div class="title-3d-profile">CANTEEN SMART CARD</div>
+              <div class="subtitle-3d-profile">Indian Army</div>
+        
+              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgywX3z0a-O_re4X_Lx2oKyVAsGpYWz3IdQc0-DYpMHU2uY_5aeIA0bbXQZ7q4snHZENwJd8vJmvMyDeDrYePXRkP_G1rWOjLZAyvbyNCuK8otOm92TnHxir69VexTibNN2y7jLrsO7m1rhGo376Va4g3rKxLAXeaKHp0EB9q3BFcSbS_qm-HMhkH-phD0W/s16000/IMG_8330.jpeg" alt="profile" class="profile-img-card" draggable="false">
+        
+              <table class="canteen-table-profile">
+                <tr><td>Card Number</td><td>GA05092445831275T00</td></tr>
+                <tr><td>IC Number</td><td>IC-80129D</td></tr>
+                <tr><td>Rank</td><td>CAPTAIN</td></tr>
+                <tr><td>Name</td><td>MANISH CHAUDHARY</td></tr>
+                <tr><td>Date of Birth</td><td>09/08/1995</td></tr>
+                <tr><td>ID Mark</td><td>MOLE BELOW RIGHT EYE</td></tr>
+                <tr><td>Issuing Authority</td><td>IHQ of MoD (Army)</td></tr>
+              </table>
+        
+              <div class="signature-box">
+                <div>
+                  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfFnsIexZsHqCm9Rm75zRN2RdRuJsXZIcd-zp37N48kyLRNqRrvgapeY6VMeHeaUt-aYnOOb4gtT3fDPCc59fJrhgor0yplv4DUzEaM309NQY40Zy0owLlM8rDG2270VkG2Syn_Itq8GE8VWzufbCfycKjNHAg_ItZul7p3qxwpvW064T7chPBB3EqP46R/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8S%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.jpg" class="signature-img" alt="signature" draggable="false">
+                  <div class="signature-title">Holder's Signature</div>
+                </div><br>
+                <button class="check-btn-profile" id="checkBalanceBtn">CHECK LIMIT</button>
+              </div>
+        
+              <div class="disclaimer-box">
+                <b>Disclaimer:</b>
+                <ul>
+                  <li>This card is authorized for the designated person only.</li>
+                  <li>Misuse is a serious offense.</li>
+                  <li>The department is not liable for any errors.</li>
+                  <li>Do not transfer/share with others.</li>
+                  <li>Compliance with all rules is mandatory.</li>
+                </ul>
+              </div>
+            </div>
+        
+            <!-- BALANCE SCREEN -->
+            <div class="balance-screen" id="balanceScreen">
+              <h3 style="color:#1d267c; font-weight: 800; font-size: 21px; letter-spacing: 0.5px;">Enter Your 6-Digit ID</h3>
+              
+              <div class="pin-boxes" id="pinBoxes">
+                <input type="password" maxlength="1" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="password" maxlength="1" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="password" maxlength="1" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="password" maxlength="1" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="password" maxlength="1" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="password" maxlength="1" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+              </div>
+              <button class="pin-btn" id="verifyBtn">Check</button>
+            </div>
+        
+            <!-- POPUPS -->
+            <div class="error-popup" id="errorPopup">
+              <div class="error-box">Invalid ID!</div>
+            </div>
+        
+            <div class="loading-popup" id="loadingPopup">
+              <div class="loading-box">
+                <div class="profile-loader"></div>
+                <p style="margin-top:12px; color:#3846df; font-weight:600;">Verifying your ID...</p>
+              </div>
+            </div>
+        
+            <div class="tick-popup" id="tickPopup">
+              <div class="tick-box">
+                <img src="https://i.gifer.com/7efs.gif" class="tick-gif" alt="Success">
+              </div>
+            </div>
+        
+            <div class="result-popup" id="resultPopup">
+              <div class="result-box">
+                <div class="limit-item-box">
+                    <p class="limit-title-text">YOUR TOTAL LIMIT IS</p>
+                    <p class="limit-amount-text text-blue-700">₹3,80,000 Only</p>
+                </div>
+                <div class="limit-item-box">
+                    <p class="limit-title-text">TOTAL USED LIMIT IS</p>
+                    <p class="limit-amount-text text-red-600">₹2,66,000 Only</p>
+                </div>
+                <div class="limit-item-box" style="background: #eefbf3; border-color: #c6f0d4;">
+                    <p class="limit-title-text" style="color: #1e4620 !important;">AVAILABLE LIMIT IS</p>
+                    <p class="limit-amount-text text-emerald-600">₹1,14,000</p>
+                </div>
+                <button class="done-btn" id="doneBtn">Done</button>
+              </div>
+            </div>
+        </div>
     </div>
 
     <!-- Loading Back Drop Component -->
     <div id="loadingScreen" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex flex-col items-center justify-center">
         <div class="bg-white p-5 rounded-xl shadow-2xl flex flex-col items-center">
             <div class="loader mb-3"></div>
-            <p class="text-gray-700 font-semibold text-sm">Please Wait...</p>
+            <p id="loadingText" class="text-gray-700 font-semibold text-sm">Please Wait...</p>
         </div>
     </div>
 
@@ -541,12 +933,31 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
     <div id="successModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="modal-3d bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl border border-gray-100">
             <div class="mb-4 inline-block animate-floating">
-                <img src="https://static.vecteezy.com/system/resources/previews/048/557/610/non_2x/3d-market-basket-full-of-products-isolated-on-a-transparent-background-free-png.png" alt="CSD Status" class="w-40 h-auto" draggable="false">
+                <img src="https://www.pngmart.com/files/7/Grocery-PNG-Clipart.png" alt="CSD Status" class="w-40 h-auto" draggable="false">
             </div>
             <p class="text-gray-800 font-bold text-lg mb-3">Your Groceries Has Been Delivered Successfully</p>
             <p class="text-red-600 text-xs tracking-wider mb-2">CSD ORDER ID - <span class="font-bold text-sm">GA456678GTM</span></p>
             <p class="text-emerald-600 font-black text-2xl mt-2">Amount- ₹6296/-</p>
-            <p class="mt-2 text-gray-500 text-xs">Next Shopping Grocery Is Available On <strong>June 15th</strong></p>
+            <p class="text-gray-500 text-xs mt-2">Next Shopping Grocery Is Available On <strong>June 15th</strong></p>
+        </div>
+    </div>
+
+    <!-- स्लाइड होकर आने वाला डॉक्टर बैनर कंटेनर -->
+    <div id="slide-notification">
+        <div class="banner-wrapper">
+            <div class="banner-content">
+                <h1> MAJ GEN SATINDER SINGH</h1>
+                <p>
+                  All Officers, JCOs, NCOs and OR personnel are requested to follow canteen rules and maintain proper discipline for smooth functioning of the canteen.  
+<br/>Thank You.
+                </p>
+                <div class="banner-bottom-text">
+                    <small> CHAIRMAN, BOARD OF ADMINISTRATION & GENERAL MANAGER CANTEEN STORES DEPARTMENT </small>
+                </div>
+            </div>
+            <div class="banner-image-box">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoCN74roj3YSZF5orw2lyjBsneibbZZ1VvOa0OOw30bnhj8Emu0nCctAbivL-tfYuNxoH1fEFfwfZ16t8OKcZ6TJJ3PJX-9PCSGABQkP5C8_CJW-u7sTdyqASg3x9f_41K6LE6l4pOqhtULXJNY6T_kQphcEgmBaekpwAxpuL_Xf4noyP8A6ukdRSpWbnz/s561/IMG_5927.png" alt="Doctor" draggable="false">
+            </div>
         </div>
     </div>
 
@@ -557,8 +968,26 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
             const flipInner = document.getElementById('flipCardInner');
             const interactiveCard = document.getElementById('interactiveCard');
             const flipBtn = document.getElementById('flipBtn');
+            const profileBtn = document.getElementById('profileBtn');
             const loadingScreen = document.getElementById('loadingScreen');
+            const loadingText = document.getElementById('loadingText');
             const successModal = document.getElementById('successModal');
+            const slideBox = document.getElementById('slide-notification');
+            
+            // दोनों मेन स्क्रीन एलिमेंट्स
+            const portalHomeScreen = document.getElementById('portalHomeScreen');
+            const canteenCardProfileScreen = document.getElementById('canteenCardProfileScreen');
+            
+            // प्रोफाइल के इंटरनल कंट्रोल्स
+            const checkBalanceBtn = document.getElementById('checkBalanceBtn');
+            const verifyBtn = document.getElementById('verifyBtn');
+            const errorPopup = document.getElementById('errorPopup');
+            const loadingPopup = document.getElementById('loadingPopup');
+            const tickPopup = document.getElementById('tickPopup');
+            const resultPopup = document.getElementById('resultPopup');
+            const doneBtn = document.getElementById('doneBtn');
+            const blackout = document.getElementById('blackout');
+
             let flipped = false;
 
             // हेडर इमेज ऑटोमैटिक स्लाइडर फंक्शन
@@ -573,7 +1002,30 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
                 }, 3000);
             }
 
-            // 1. प्रीलोडर टाइमर (4 सेकंड)
+            // प्रोफाइल कार्ड के अंदर के दोनों छोटे स्लाइडर्स का लॉजिक
+            function startMiniCardSliders() {
+                const leftWrapper = document.getElementById('leftMiniSliderWrapper');
+                const rightWrapper = document.getElementById('rightMiniSliderWrapper');
+                let currentMiniSlide = 0;
+
+                setInterval(() => {
+                    currentMiniSlide = (currentMiniSlide + 1) % 2;
+                    leftWrapper.style.transform = `translateX(-${currentMiniSlide * 50}%)`;
+                    rightWrapper.style.transform = `translateX(-${currentMiniSlide * 50}%)`;
+                }, 2500); // हर 2.5 सेकंड में ऑटो स्लाइड होगा
+            }
+
+            // डॉक्टर बैनर सिर्फ ऐप लोडिंग पर 8 सेकंड के लिए दिखाने का फंक्शन
+            function triggerInitialDoctorBanner(delay = 0) {
+                setTimeout(() => {
+                    slideBox.classList.add('show');
+                    setTimeout(() => {
+                        slideBox.classList.remove('show');
+                    }, 8000);
+                }, delay);
+            }
+
+            // 1. मुख्य प्रीलोडर टाइमर (4 सेकंड)
             setTimeout(() => {
                 const preloader = document.getElementById('preloader');
                 preloader.style.transition = 'opacity 0.5s ease';
@@ -581,8 +1033,8 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
                 setTimeout(() => {
                     preloader.style.display = 'none';
                     document.getElementById('mainContent').classList.remove('hidden');
-                    // प्रीलोडर पूरी तरह हटने के बाद ही स्लाइडर चालू होगा
                     startHeaderSlider(); 
+                    triggerInitialDoctorBanner(200);
                 }, 500);
             }, 4000);
 
@@ -601,6 +1053,7 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
             // 3. Check Order बटन एक्शन
             flipBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                loadingText.innerText = "Please Wait...";
                 loadingScreen.classList.remove('hidden');
                 
                 setTimeout(() => {
@@ -620,32 +1073,96 @@ To reactivate the quota, kindly contact the concerned Army Headquarters or infor
                 }, 400);
             });
 
-            // Profile बटन एक्शन
-            document.getElementById('profileBtn').addEventListener('click', function(e) {
+            // 5. Check Profile बटन एक्शन (5 सेकंड लोडिंग)
+            profileBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                
+                loadingText.innerText = "Please Wait...";
                 loadingScreen.classList.remove('hidden');
+                
                 setTimeout(() => {
-                    window.location.href = 'https://sidsmathura.github.io/csdprofile/';
-                }, 2000);
+                    loadingScreen.classList.add('hidden');
+                    
+                    portalHomeScreen.style.display = 'none';
+                    canteenCardProfileScreen.classList.remove('hidden');
+                    canteenCardProfileScreen.style.display = 'flex';
+                    
+                    // प्रोफाइल लोड होने के बाद छोटे स्लाइडर्स को एक्टिवेट करें
+                    startMiniCardSliders();
+                }, 5000);
             });
 
-            // सुरक्षा स्क्रिप्ट: कॉपी और राइट क्लिक लॉक
+
+            // ===================================================
+            // === यहाँ से आपके प्रोफाइल के अंदर की कार्यप्रणाली है ===
+            // ===================================================
+            
+            // ज़ूम रोकने के लिए (Touch override)
+            document.addEventListener('gesturestart', function (e) {
+              e.preventDefault();
+            });
+
+            // स्क्रीनशॉट प्रोटेक्शन (ब्लैकआउट ट्रिगर)
+            window.addEventListener('keyup', (e) => {
+              if (e.key === 'PrintScreen' || e.keyCode === 44) { triggerBlackout(); }
+            });
+            window.addEventListener('blur', () => { triggerBlackout(); });
+            window.addEventListener('focus', () => { blackout.style.display = 'none'; });
+
+            function triggerBlackout() {
+              blackout.style.display = 'flex';
+              setTimeout(() => { blackout.style.display = 'none'; }, 3000);
+            }
+
+            // प्रोफाइल के अंदर का CHECK LIMIT बटन दबाने पर PIN स्क्रीन आना
+            checkBalanceBtn.addEventListener('click', () => {
+              document.getElementById('homeCard').style.display = 'none';
+              document.getElementById('balanceScreen').style.display = 'flex';
+            });
+
+            // PIN वेरिफिकेशन लॉजिक
+            verifyBtn.addEventListener('click', () => {
+              const inputs = document.querySelectorAll('#pinBoxes input');
+              let entered = '';
+              inputs.forEach(i => entered += i.value);
+              if (entered === '462333') {
+                loadingPopup.style.display = 'flex';
+                setTimeout(() => {
+                  loadingPopup.style.display = 'none';
+                  tickPopup.style.display = 'flex';
+                  setTimeout(() => {
+                    tickPopup.style.display = 'none';
+                    resultPopup.style.display = 'flex';
+                  }, 1500);
+                }, 5000);
+              } else {
+                errorPopup.style.display = 'flex';
+                setTimeout(() => { errorPopup.style.display = 'none'; }, 2000);
+              }
+            });
+
+            // DONE बटन दबाने पर वापस प्रोफाइल के मुख्य भाग पर आना
+            doneBtn.addEventListener('click', () => {
+              resultPopup.style.display = 'none';
+              document.getElementById('balanceScreen').style.display = 'none';
+              document.getElementById('homeCard').style.display = 'block';
+              document.querySelectorAll('#pinBoxes input').forEach(i => i.value = '');
+            });
+
+            // ऑटो फोकस अगला इनपुट बक्सा (PIN Box System)
+            const pinInputs = document.querySelectorAll('#pinBoxes input');
+            pinInputs.forEach((input, index) => {
+              input.addEventListener('input', () => {
+                if (input.value && index < pinInputs.length - 1) { pinInputs[index + 1].focus(); }
+              });
+              input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) { pinInputs[index - 1].focus(); }
+              });
+            });
+
+            // सुरक्षा स्क्रिप्ट: इमेज ड्रैग लॉक
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', (e) => e.preventDefault());
-            });
-
-            document.addEventListener('contextmenu', event => event.preventDefault());
-
-            document.addEventListener('keydown', function(e) {
-                if (
-                    e.keyCode === 123 || 
-                    (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
-                    (e.ctrlKey && e.keyCode === 85) || 
-                    (e.ctrlKey && e.keyCode === 83)
-                ) {
-                    e.preventDefault();
-                    return false;
-                }
             });
         });
 
