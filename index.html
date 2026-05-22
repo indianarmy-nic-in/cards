@@ -629,6 +629,308 @@
         .done-btn { margin-top: 15px; background: #3846df; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 14px; cursor: pointer; font-weight: bold;}
         .profile-loader { border: 4px solid #f3f3f3; border-top: 4px solid #3846df; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: auto; }
         .tick-gif { width: 300px; height: 220px; object-fit: contain; margin: auto; pointer-events: none; }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* मुख्य बटन स्टाइल */
+.quota-btn {
+    background-color: #26248a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.quota-btn:hover {
+    background-color: #333;
+}
+
+/* पॉप-अप बैकग्राउंड ओवरले */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* मुख्य सफेद कंटेंट बॉक्स */
+.modal-box {
+    background: #ffffff;
+    width: 95%;
+    max-width: 560px;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+/* हेडर और लाल रंग का क्लोज बटन */
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+}
+
+/* स्क्रोल होने वाला लिस्ट एरिया */
+.modal-body {
+    padding: 15px 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+/* कैटगरी टाइटल (Whisky, Beer आदि) */
+.category-title {
+    background: #f8f9fa;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+    margin: 15px 0 8px 0;
+    border-left: 4px solid #0056b3;
+    border-radius: 2px;
+}
+
+.category-title:first-of-type {
+    margin-top: 0;
+}
+
+/* लिस्ट की रो (Row) */
+.liquor-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f1f1;
+    gap: 10px;
+}
+
+.liquor-item:last-child {
+    border-bottom: none;
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+}
+
+/* सभी प्रोडक्ट्स के लिए अलग इमेज स्टाइल */
+.liquor-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.liquor-name {
+    font-size: 15px;
+    color: #222;
+    font-weight: 600;
+}
+
+.liquor-price {
+    font-size: 13px;
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* राइट साइड के एक्शन्स (Quantity + Button) */
+.item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+/* क्वांटिटी सिलेक्टर डिज़ाइन (- 1 +) */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    width: 26px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: #e9ecef;
+}
+
+.qty-input {
+    width: 28px;
+    height: 24px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* नीले रंग का बटन */
+.add-cart-btn {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.add-cart-btn:hover {
+    background-color: #004085;
+}
+
+/* 4-सेकंड लोडिंग स्पिनर */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    display: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #0056b3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* चेतावनी पॉप-अप बॉडी */
+.warning-body {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.error-animation-icon {
+    display: block;      /* आइकन को ब्लॉक एलिमेंट बनाने के लिए */
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 15px auto; /* ऊपर 0, लेफ्ट-राइट ऑटोमैटिक (बीच में), और नीचे 15px का मार्जिन */
+}
+
+.warning-title {
+    color: #dc3545;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.warning-text {
+    color: #333333;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+
+
+
+
     </style>
 </head>
 <body class="flex flex-col items-center justify-start select-none" oncontextmenu="return false;">
@@ -781,7 +1083,7 @@
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVOJRMTmxd6rJkbCyY4sSP9F6A5MCM1U0v1vSrnckD6cJyQkEcVwyMsr3moHrye8gvqxRKV_HNaOSs8bfJGeCS8N4RJr9Tt6L5thgQ66pS274VsYw8VlNSK0-O-BORCq_RoUH87K1lDy0rR6H9CeXeFrMw7gmj8WwNKIGLJaTwr2oOkOgiKenxjQ3duBhc/s1100/Untitled%20design%20-%205.jpeg" alt="XUV300" draggable="false" />
                         </div>
                         <h4 class="font-bold text-xs text-gray-700 truncate">Apple iPhone 16 128GB</h4>
-                        <p class="text-[10px] text-gray-500">15 Nov 2024</p>
+                        <p class="text-[10px] text-gray-500">15 Nov 2025</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹ 50,100*</p>
                     </div>
                 </div>
@@ -790,6 +1092,73 @@
             <!-- Action Buttons -->
             <div class="mb-12 flex gap-4 justify-center">
                 <button id="flipBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Order</button>
+
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquor Quota System</title>
+    <!-- क्रॉस बटन और प्लस/माइनस के लिए Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- बाहरी CSS फ़ाइल को लिंक करना -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- मुख्य ट्रिगर बटन -->
+    <button class="quota-btn" onclick="openModal('quotaModal')">Liquor Quota</button>
+
+    <!-- पहला पॉप-अप: लिस्ट बॉक्स -->
+    <div class="modal-overlay" id="quotaModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Liquor Quota List</h3>
+                <button class="close-btn" onclick="closeModal('quotaModal')"><i class="fa-solid fa-square-xmark"></i></button>
+            </div>
+            <div class="modal-body" id="liquorListContainer">
+                <!-- जावास्क्रिप्ट डेटा यहाँ से लोड होगा -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 4 सेकंड का स्पिनर ओवरले -->
+    <div class="loader-overlay" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- दूसरा पॉप-अप: एरर मैसेज बॉक्स -->
+    <!-- दूसरा पॉप-अप: एरर मैसेज बॉक्स -->
+<div class="modal-overlay" id="warningModal">
+    <div class="modal-box">
+        <div class="modal-header" style="border-bottom: none;">
+            <div></div>
+            <button class="close-btn" onclick="closeModal('warningModal')"><i class="fa-solid fa-square-xmark"></i></button>
+        </div>
+        <div class="warning-body">
+            
+            <!-- SVG को हटाकर यहाँ GIF इमेज लगाई गई है -->
+            <img src="https://ugokawaii.com/wp-content/uploads/2022/06/cross-300x300.gif" alt="Error GIF" class="error-animation-icon">
+            
+            <div class="warning-title"> LIQUOR QUOTA NOTICE </div>
+            <p class="warning-text">
+                As per the rules and regulations of the Canteen Stores Department, your Liquor Entitlement/Quota has not been issued yet. To avail the liquor facility, completion of the required eligibility verification and documentation process is mandatory.
+After successful verification and approval, you will be authorized for a monthly liquor quota of 10 bottles as per applicable CSD rules and entitlement policy.
+            </p>
+        </div>
+    </div>
+</div>
+
+    <!-- बाहरी जावास्क्रिप्ट फ़ाइल को लिंक करना -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
                 <button id="profileBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Profile</button>
             </div>
         </div>
@@ -1173,6 +1542,138 @@
         function closeCustomURCPopup(){
             document.getElementById("customPopup").style.display = "none";
         }
+
+// सभी 33 ब्रांड्स के लिए अलग-अलग यूनीक इमेजेस और कीमतों का डेटा ऑब्जेक्ट
+const liquorData = {
+    "Whisky": [
+        { id: "w1", name: "Royal Stag", price: "₹850", img: "https://dms.mydukaan.io/original/jpeg/214913/653513f8-86b0-46cd-8db6-c1e5682cf34a.png" },
+        { id: "w2", name: "Blenders Pride", price: "₹1,250", img: "https://images.unsplash.com/photo-1614313511387-14fe6472d953?w=100&auto=format&fit=crop&q=60" },
+        { id: "w3", name: "Imperial Blue", price: "₹750", img: "https://images.unsplash.com/photo-1569529465841-dfedd87500f1?w=100&auto=format&fit=crop&q=60" },
+        { id: "w4", name: "McDowell’s No.1", price: "₹700", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=100&auto=format&fit=crop&q=60" },
+        { id: "w5", name: "Officer’s Choice", price: "₹650", img: "https://images.unsplash.com/photo-1582798358481-d199fb73cb11?w=100&auto=format&fit=crop&q=60" },
+        { id: "w6", name: "Antiquity Blue", price: "₹1,400", img: "https://images.unsplash.com/photo-1608885898957-a599fb15de31?w=100&auto=format&fit=crop&q=60" },
+        { id: "w7", name: "Signature", price: "₹1,300", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=100&auto=format&fit=crop&q=60" },
+        { id: "w8", name: "Royal Challenge", price: "₹900", img: "https://images.unsplash.com/photo-1510626176961-4b57d4f3f313?w=100&auto=format&fit=crop&q=60" },
+        { id: "w9", name: "Black Dog", price: "₹2,800", img: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=100&auto=format&fit=crop&q=60" },
+        { id: "w10", name: "Chivas Regal", price: "₹5,500", img: "https://images.unsplash.com/photo-1602867213660-a6a75843177b?w=100&auto=format&fit=crop&q=60" },
+        { id: "w11", name: "Johnnie Walker", price: "₹6,000", img: "https://images.unsplash.com/photo-1592751829963-8319f72c3115?w=100&auto=format&fit=crop&q=60" }
+    ],
+    "Rum": [
+        { id: "r1", name: "Old Monk", price: "₹600", img: "https://images.unsplash.com/photo-1613245354112-9f950990086b?w=100&auto=format&fit=crop&q=60" },
+        { id: "r2", name: "Contessa Rum", price: "₹550", img: "https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=100&auto=format&fit=crop&q=60" },
+        { id: "r3", name: "Hercules Rum", price: "₹620", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=100&auto=format&fit=crop&q=60" },
+        { id: "r4", name: "Bacardi Rum", price: "₹1,400", img: "https://images.unsplash.com/photo-1517043530480-135111ec6014?w=100&auto=format&fit=crop&q=60" }
+    ],
+    "Beer": [
+        { id: "b1", name: "Kingfisher", price: "₹160", img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=100&auto=format&fit=crop&q=60" },
+        { id: "b2", name: "Tuborg", price: "₹150", img: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=100&auto=format&fit=crop&q=60" },
+        { id: "b3", name: "Budweiser", price: "₹210", img: "https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=100&auto=format&fit=crop&q=60" },
+        { id: "b4", name: "Carlsberg", price: "₹200", img: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=100&auto=format&fit=crop&q=60" },
+        { id: "b5", name: "Heineken", price: "₹230", img: "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?w=100&auto=format&fit=crop&q=60" },
+        { id: "b6", name: "Bira 91", price: "₹190", img: "https://images.unsplash.com/photo-1629671611356-d42852899436?w=100&auto=format&fit=crop&q=60" }
+    ],
+    "Vodka": [
+        { id: "v1", name: "Magic Moments", price: "₹850", img: "https://images.unsplash.com/photo-1551538827-9c02e49933a4?w=100&auto=format&fit=crop&q=60" },
+        { id: "v2", name: "Smirnoff", price: "₹1,450", img: "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=100&auto=format&fit=crop&q=60" },
+        { id: "v3", name: "Absolut Vodka", price: "₹2,800", img: "https://images.unsplash.com/photo-1523905330026-b8bd1f5f3ccd?w=100&auto=format&fit=crop&q=60" }
+    ],
+    "Brandy": [
+        { id: "br1", name: "Honey Bee Brandy", price: "₹650", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=100&auto=format&fit=crop&q=60" },
+        { id: "br2", name: "Mansion House Brandy", price: "₹900", img: "https://images.unsplash.com/photo-1568649929103-28ffbfc917b4?w=100&auto=format&fit=crop&q=60" },
+        { id: "br3", name: "Morpheus Brandy", price: "₹1,350", img: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=100&auto=format&fit=crop&q=60" }
+    ],
+    "Gin": [
+        { id: "g1", name: "Blue Riband Gin", price: "₹700", img: "https://images.unsplash.com/photo-1547532182-bf27815cf9c6?w=100&auto=format&fit=crop&q=60" },
+        { id: "g2", name: "Gordon’s Gin", price: "₹2,200", img: "https://images.unsplash.com/photo-1607622500231-6b4f99f37858?w=100&auto=format&fit=crop&q=60" },
+        { id: "g3", name: "Bombay Sapphire", price: "₹3,800", img: "https://images.unsplash.com/photo-1520174691701-bc555a3404ca?w=100&auto=format&fit=crop&q=60" }
+    ],
+    "Wine": [
+        { id: "wn1", name: "Sula Wines", price: "₹850", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=100&auto=format&fit=crop&q=60" },
+        { id: "wn2", name: "Fratelli Wines", price: "₹800", img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=100&auto=format&fit=crop&q=60" },
+        { id: "wn3", name: "Grover Zampa", price: "₹950", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=100&auto=format&fit=crop&q=60" }
+    ]
+};
+
+// लिस्ट को रेंडर करने का फंक्शन
+function initializeLiquorList() {
+    const container = document.getElementById('liquorListContainer');
+    if (!container) return;
+    
+    let htmlContent = '';
+
+    for (const [category, items] of Object.entries(liquorData)) {
+        htmlContent += `<div class="category-title">${category}</div>`;
+        items.forEach(item => {
+            htmlContent += `
+                <div class="liquor-item">
+                    <div class="item-left">
+                        <img src="${item.img}" alt="${item.name}" class="liquor-img">
+                        <div class="item-details">
+                            <span class="liquor-name">${item.name}</span>
+                            <span class="liquor-price">${item.price}</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <!-- Add to Cart के ठीक ऊपर Quantity (- 1 +) -->
+                        <div class="quantity-selector">
+                            <button class="qty-btn" onclick="adjustQty('${item.id}', -1)">-</button>
+                            <input type="text" id="qty-${item.id}" class="qty-input" value="1" readonly>
+                            <button class="qty-btn" onclick="adjustQty('${item.id}', 1)">+</button>
+                        </div>
+                        <button class="add-cart-btn" onclick="handleAddToCart()">Add To Cart</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    container.innerHTML = htmlContent;
+}
+
+// प्लस/माइनस बटन क्लिक पर 1 से 10 तक संख्या कंट्रोल करने का फंक्शन
+function adjustQty(id, change) {
+    const qtyInput = document.getElementById(`qty-${id}`);
+    if (!qtyInput) return;
+    
+    let currentVal = parseInt(qtyInput.value);
+    currentVal += change;
+    
+    // लिमिट 1 से 10 के बीच लॉक है
+    if (currentVal >= 1 && currentVal <= 10) {
+        qtyInput.value = currentVal;
+    }
+}
+
+// पॉप-अप ओपन करने का फंक्शन
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.add('active');
+}
+
+// पॉप-अप क्लोज करने का फंक्शन
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.remove('active');
+}
+
+// कार्ट बटन क्लिक होने पर लोडिंग स्पिनर और एरर पॉप-अप फ्लो
+function handleAddToCart() {
+    closeModal('quotaModal');
+    
+    const loader = document.getElementById('loadingSpinner');
+    if (loader) loader.style.display = 'flex';
+
+    // ठीक 4 सेकंड (4000ms) बाद अगला पॉप-अप खुलेगा
+    setTimeout(() => {
+        if (loader) loader.style.display = 'none';
+        openModal('warningModal');
+    }, 4000);
+}
+
+// DOM लोड होने पर लिस्ट चालू करें
+document.addEventListener("DOMContentLoaded", initializeLiquorList);
+
+
+
     </script>
 </body>
 </html>
