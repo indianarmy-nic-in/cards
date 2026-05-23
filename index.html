@@ -775,14 +775,21 @@ body {
     flex: 1;
 }
 
-/* सभी प्रोडक्ट्स के लिए अलग इमेज स्टाइल */
-.liquor-img {
+/* ========================================================
+   यहाँ पर इमेज की बजाय आइकॉन बॉक्स के लिए नई CSS दी गयी है
+   ======================================================== */
+.liquor-icon-box {
     width: 45px;
     height: 45px;
-    object-fit: cover;
     border-radius: 6px;
     border: 1px solid #ddd;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: #722F37; /* वाइन जैसा रंग */
+    flex-shrink: 0;
 }
 
 .item-details {
@@ -1093,22 +1100,16 @@ body {
             <div class="mb-12 flex gap-4 justify-center">
                 <button id="flipBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Order</button>
 
+                <!-- मुख्य ट्रिगर बटन -->
+                <button class="quota-btn" onclick="openModal('quotaModal')">Liquor Quota</button>
 
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquor Quota System</title>
-    <!-- क्रॉस बटन और प्लस/माइनस के लिए Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- बाहरी CSS फ़ाइल को लिंक करना -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <!-- मुख्य ट्रिगर बटन -->
-    <button class="quota-btn" onclick="openModal('quotaModal')">Liquor Quota</button>
+                <button id="profileBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Profile</button>
+            </div>
+        </div>
+        
+        <!-- Footer Info -->
+        <div class="text-[11px] text-gray-400 font-medium pt-4 pb-2 text-center w-full border-t border-gray-200/50"> © Indian Armed Forces CSD Portal 2026</div>
+    </div>
 
     <!-- पहला पॉप-अप: लिस्ट बॉक्स -->
     <div class="modal-overlay" id="quotaModal">
@@ -1129,44 +1130,23 @@ body {
     </div>
 
     <!-- दूसरा पॉप-अप: एरर मैसेज बॉक्स -->
-    <!-- दूसरा पॉप-अप: एरर मैसेज बॉक्स -->
-<div class="modal-overlay" id="warningModal">
-    <div class="modal-box">
-        <div class="modal-header" style="border-bottom: none;">
-            <div></div>
-            <button class="close-btn" onclick="closeModal('warningModal')"><i class="fa-solid fa-square-xmark"></i></button>
-        </div>
-        <div class="warning-body">
-            
-            <!-- SVG को हटाकर यहाँ GIF इमेज लगाई गई है -->
-            <img src="https://ugokawaii.com/wp-content/uploads/2022/06/cross-300x300.gif" alt="Error GIF" class="error-animation-icon">
-            
-            <div class="warning-title"> LIQUOR QUOTA NOTICE </div>
-            <p class="warning-text">
-                As per the rules and regulations of the Canteen Stores Department, your Liquor Entitlement/Quota has not been issued yet. To avail the liquor facility, completion of the required eligibility verification and documentation process is mandatory.
-After successful verification and approval, you will be authorized for a monthly liquor quota of 10 bottles as per applicable CSD rules and entitlement policy.
-            </p>
-        </div>
-    </div>
-</div>
-
-    <!-- बाहरी जावास्क्रिप्ट फ़ाइल को लिंक करना -->
-    <script src="script.js"></script>
-</body>
-</html>
-
-
-
-
-
-                <button id="profileBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Profile</button>
+    <div class="modal-overlay" id="warningModal">
+        <div class="modal-box">
+            <div class="modal-header" style="border-bottom: none;">
+                <div></div>
+                <button class="close-btn" onclick="closeModal('warningModal')"><i class="fa-solid fa-square-xmark"></i></button>
+            </div>
+            <div class="warning-body">
+                <!-- SVG को हटाकर यहाँ GIF इमेज लगाई गई है -->
+                <img src="https://ugokawaii.com/wp-content/uploads/2022/06/cross-300x300.gif" alt="Error GIF" class="error-animation-icon">
+                <div class="warning-title"> LIQUOR QUOTA NOTICE </div>
+                <p class="warning-text">
+                    As per the rules and regulations of the Canteen Stores Department, your Liquor Entitlement/Quota has not been issued yet. To avail the liquor facility, completion of the required eligibility verification and documentation process is mandatory.
+                    After successful verification and approval, you will be authorized for a monthly liquor quota of 10 bottles as per applicable CSD rules and entitlement policy.
+                </p>
             </div>
         </div>
-        
-        <!-- Footer Info -->
-        <div class="text-[11px] text-gray-400 font-medium pt-4 pb-2 text-center w-full border-t border-gray-200/50"> © Indian Armed Forces CSD Portal 2026</div>
     </div>
-
 
     <!-- ========================================================== -->
     <!-- === यहाँ से आपका इन-लाइन लोड होने वाला प्रोफाइल सेक्शन है === -->
@@ -1546,51 +1526,51 @@ After successful verification and approval, you will be authorized for a monthly
 // सभी 33 ब्रांड्स के लिए अलग-अलग यूनीक इमेजेस और कीमतों का डेटा ऑब्जेक्ट
 const liquorData = {
     "Whisky": [
-        { id: "w1", name: "Royal Stag", price: "₹850", img: "https://dms.mydukaan.io/original/jpeg/214913/653513f8-86b0-46cd-8db6-c1e5682cf34a.png" },
-        { id: "w2", name: "Blenders Pride", price: "₹1,250", img: "https://images.unsplash.com/photo-1614313511387-14fe6472d953?w=100&auto=format&fit=crop&q=60" },
-        { id: "w3", name: "Imperial Blue", price: "₹750", img: "https://images.unsplash.com/photo-1569529465841-dfedd87500f1?w=100&auto=format&fit=crop&q=60" },
-        { id: "w4", name: "McDowell’s No.1", price: "₹700", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=100&auto=format&fit=crop&q=60" },
-        { id: "w5", name: "Officer’s Choice", price: "₹650", img: "https://images.unsplash.com/photo-1582798358481-d199fb73cb11?w=100&auto=format&fit=crop&q=60" },
-        { id: "w6", name: "Antiquity Blue", price: "₹1,400", img: "https://images.unsplash.com/photo-1608885898957-a599fb15de31?w=100&auto=format&fit=crop&q=60" },
-        { id: "w7", name: "Signature", price: "₹1,300", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=100&auto=format&fit=crop&q=60" },
-        { id: "w8", name: "Royal Challenge", price: "₹900", img: "https://images.unsplash.com/photo-1510626176961-4b57d4f3f313?w=100&auto=format&fit=crop&q=60" },
-        { id: "w9", name: "Black Dog", price: "₹2,800", img: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=100&auto=format&fit=crop&q=60" },
-        { id: "w10", name: "Chivas Regal", price: "₹5,500", img: "https://images.unsplash.com/photo-1602867213660-a6a75843177b?w=100&auto=format&fit=crop&q=60" },
-        { id: "w11", name: "Johnnie Walker", price: "₹6,000", img: "https://images.unsplash.com/photo-1592751829963-8319f72c3115?w=100&auto=format&fit=crop&q=60" }
+        { id: "w1", name: "Royal Stag", price: "₹850" },
+        { id: "w2", name: "Blenders Pride", price: "₹1,250" },
+        { id: "w3", name: "Imperial Blue", price: "₹750" },
+        { id: "w4", name: "McDowell’s No.1", price: "₹700" },
+        { id: "w5", name: "Officer’s Choice", price: "₹650" },
+        { id: "w6", name: "Antiquity Blue", price: "₹1,400" },
+        { id: "w7", name: "Signature", price: "₹1,300" },
+        { id: "w8", name: "Royal Challenge", price: "₹900" },
+        { id: "w9", name: "Black Dog", price: "₹2,800" },
+        { id: "w10", name: "Chivas Regal", price: "₹5,500" },
+        { id: "w11", name: "Johnnie Walker", price: "₹6,000" }
     ],
     "Rum": [
-        { id: "r1", name: "Old Monk", price: "₹600", img: "https://images.unsplash.com/photo-1613245354112-9f950990086b?w=100&auto=format&fit=crop&q=60" },
-        { id: "r2", name: "Contessa Rum", price: "₹550", img: "https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=100&auto=format&fit=crop&q=60" },
-        { id: "r3", name: "Hercules Rum", price: "₹620", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=100&auto=format&fit=crop&q=60" },
-        { id: "r4", name: "Bacardi Rum", price: "₹1,400", img: "https://images.unsplash.com/photo-1517043530480-135111ec6014?w=100&auto=format&fit=crop&q=60" }
+        { id: "r1", name: "Old Monk", price: "₹600" },
+        { id: "r2", name: "Contessa Rum", price: "₹550" },
+        { id: "r3", name: "Hercules Rum", price: "₹620" },
+        { id: "r4", name: "Bacardi Rum", price: "₹1,400" }
     ],
     "Beer": [
-        { id: "b1", name: "Kingfisher", price: "₹160", img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=100&auto=format&fit=crop&q=60" },
-        { id: "b2", name: "Tuborg", price: "₹150", img: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=100&auto=format&fit=crop&q=60" },
-        { id: "b3", name: "Budweiser", price: "₹210", img: "https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=100&auto=format&fit=crop&q=60" },
-        { id: "b4", name: "Carlsberg", price: "₹200", img: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=100&auto=format&fit=crop&q=60" },
-        { id: "b5", name: "Heineken", price: "₹230", img: "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?w=100&auto=format&fit=crop&q=60" },
-        { id: "b6", name: "Bira 91", price: "₹190", img: "https://images.unsplash.com/photo-1629671611356-d42852899436?w=100&auto=format&fit=crop&q=60" }
+        { id: "b1", name: "Kingfisher", price: "₹160" },
+        { id: "b2", name: "Tuborg", price: "₹150" },
+        { id: "b3", name: "Budweiser", price: "₹210" },
+        { id: "b4", name: "Carlsberg", price: "₹200" },
+        { id: "b5", name: "Heineken", price: "₹230" },
+        { id: "b6", name: "Bira 91", price: "₹190" }
     ],
     "Vodka": [
-        { id: "v1", name: "Magic Moments", price: "₹850", img: "https://images.unsplash.com/photo-1551538827-9c02e49933a4?w=100&auto=format&fit=crop&q=60" },
-        { id: "v2", name: "Smirnoff", price: "₹1,450", img: "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=100&auto=format&fit=crop&q=60" },
-        { id: "v3", name: "Absolut Vodka", price: "₹2,800", img: "https://images.unsplash.com/photo-1523905330026-b8bd1f5f3ccd?w=100&auto=format&fit=crop&q=60" }
+        { id: "v1", name: "Magic Moments", price: "₹850" },
+        { id: "v2", name: "Smirnoff", price: "₹1,450" },
+        { id: "v3", name: "Absolut Vodka", price: "₹2,800" }
     ],
     "Brandy": [
-        { id: "br1", name: "Honey Bee Brandy", price: "₹650", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=100&auto=format&fit=crop&q=60" },
-        { id: "br2", name: "Mansion House Brandy", price: "₹900", img: "https://images.unsplash.com/photo-1568649929103-28ffbfc917b4?w=100&auto=format&fit=crop&q=60" },
-        { id: "br3", name: "Morpheus Brandy", price: "₹1,350", img: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=100&auto=format&fit=crop&q=60" }
+        { id: "br1", name: "Honey Bee Brandy", price: "₹650" },
+        { id: "br2", name: "Mansion House Brandy", price: "₹900" },
+        { id: "br3", name: "Morpheus Brandy", price: "₹1,350" }
     ],
     "Gin": [
-        { id: "g1", name: "Blue Riband Gin", price: "₹700", img: "https://images.unsplash.com/photo-1547532182-bf27815cf9c6?w=100&auto=format&fit=crop&q=60" },
-        { id: "g2", name: "Gordon’s Gin", price: "₹2,200", img: "https://images.unsplash.com/photo-1607622500231-6b4f99f37858?w=100&auto=format&fit=crop&q=60" },
-        { id: "g3", name: "Bombay Sapphire", price: "₹3,800", img: "https://images.unsplash.com/photo-1520174691701-bc555a3404ca?w=100&auto=format&fit=crop&q=60" }
+        { id: "g1", name: "Blue Riband Gin", price: "₹700" },
+        { id: "g2", name: "Gordon’s Gin", price: "₹2,200" },
+        { id: "g3", name: "Bombay Sapphire", price: "₹3,800" }
     ],
     "Wine": [
-        { id: "wn1", name: "Sula Wines", price: "₹850", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=100&auto=format&fit=crop&q=60" },
-        { id: "wn2", name: "Fratelli Wines", price: "₹800", img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=100&auto=format&fit=crop&q=60" },
-        { id: "wn3", name: "Grover Zampa", price: "₹950", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=100&auto=format&fit=crop&q=60" }
+        { id: "wn1", name: "Sula Wines", price: "₹850" },
+        { id: "wn2", name: "Fratelli Wines", price: "₹800" },
+        { id: "wn3", name: "Grover Zampa", price: "₹950" }
     ]
 };
 
@@ -1607,7 +1587,10 @@ function initializeLiquorList() {
             htmlContent += `
                 <div class="liquor-item">
                     <div class="item-left">
-                        <img src="${item.img}" alt="${item.name}" class="liquor-img">
+                        <!-- यहाँ इमेज की जगह FontAwesome का आइकॉन लगा दिया गया है -->
+                        <div class="liquor-icon-box">
+                            <i class="fa-solid fa-wine-bottle"></i>
+                        </div>
                         <div class="item-details">
                             <span class="liquor-name">${item.name}</span>
                             <span class="liquor-price">${item.price}</span>
@@ -1671,8 +1654,6 @@ function handleAddToCart() {
 
 // DOM लोड होने पर लिस्ट चालू करें
 document.addEventListener("DOMContentLoaded", initializeLiquorList);
-
-
 
     </script>
 </body>
