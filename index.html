@@ -650,8 +650,8 @@ body {
     background-color: #26248a;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 6px 14px;
+    font-size: 12px;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
@@ -936,6 +936,78 @@ body {
 
 
 
+/* Notification Slider CSS Start */
+.custom-slider-wrapper-998 {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.custom-slider-wrapper-998 * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-slider-wrapper-998 .notice-heading {
+    font-size: 15px;
+    font-weight: bold;
+    color: #d32f2f; 
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 8px; 
+}
+
+#custom-notice-slider-998 {
+    width: 100%;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 8px 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#custom-notice-slider-998 .notice-viewport {
+    height: 28px; 
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+#custom-notice-slider-998 .notice-list {
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#custom-notice-slider-998 .notice-item {
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+#custom-notice-slider-998 .notice-item a {
+    text-decoration: none !important; 
+    color: #000000 !important; 
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+    cursor: pointer; 
+}
+
+#custom-notice-slider-998 .notice-item a:hover {
+    text-decoration: none !important;
+    color: #000000 !important;
+}
+/* Notification Slider CSS End */
+
+
 
 
     </style>
@@ -975,6 +1047,35 @@ body {
                 </div>
             </div>
         </div>
+
+
+<div class="custom-slider-wrapper-998">
+    <div class="notice-heading">Latest Updates</div>
+    
+    <div id="custom-notice-slider-998">
+        <div class="notice-viewport">
+            <ul class="notice-list" id="notice-ticker-list">
+                <li class="notice-item"><a href="https://example.com/link1" target="_blank">1. Shri Girraj Maharaj College - Admission Open 2026-2027</a></li>
+                <li class="notice-item"><a href="https://example.com/link2" target="_blank">2. Mani E-Book Portal - Download Premium Study Material</a></li>
+                <li class="notice-item"><a href="https://example.com/link3" target="_blank">3. Student Result checking portal is now live. Enter Roll No.</a></li>
+                <li class="notice-item"><a href="https://example.com/link4" target="_blank">4. Download your printable report cards from the dashboard</a></li>
+                <li class="notice-item"><a href="https://example.com/link5" target="_blank">5. B.A and B.Sc Final Year Examination Time Table Released</a></li>
+                <li class="notice-item"><a href="https://example.com/link6" target="_blank">6. Important notice regarding Library book returns</a></li>
+                <li class="notice-item"><a href="https://example.com/link7" target="_blank">7. Firebase server update complete - Please re-login</a></li>
+                <li class="notice-item"><a href="https://example.com/link8" target="_blank">8. Submit your pending fees before the due date</a></li>
+                <li class="notice-item"><a href="https://example.com/link9" target="_blank">9. Upcoming Web Development Workshop for IT Students</a></li>
+                <li class="notice-item"><a href="https://example.com/link10" target="_blank">10. Update your profile picture in the student portal</a></li>
+                <li class="notice-item"><a href="https://example.com/link11" target="_blank">11. New PDF books added to the E-library section</a></li>
+                <li class="notice-item"><a href="https://example.com/link12" target="_blank">12. Holiday Notice - Institution will remain closed tomorrow</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
         <!-- Main Portal UI Content -->
         <div id="mainContent" class="hidden w-full max-w-md my-auto flex flex-col justify-center gap-4">
@@ -1064,14 +1165,20 @@ body {
                         <p class="text-[10px] text-gray-500">28 July 2024</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹4,700*</p>
                     </div>
+                    
+
+
+
                     <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
-                        <div class="prod-img-box">
+
+                      <div class="prod-img-box">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjduIE7UNS8BVBw_UBpUACG5_hZ6lQqGg4rfaN0z-6jfLj-G7Bf4qKazhZ-qFm8QFhniSaei3KefdhbHwgoby_acgZEhPYsUN9DsIvJhCq45y27cCInyhYm1cuw8bCP4HwBulXGrboW9d1mgcFRDk_0aoqQmMXkUmfpn2qsfiOJYoRkV9MHisnJ1Fm37w54/s1100/Untitled%20design%20-%201.jpeg" alt="XUV300" draggable="false" />
                         </div>
                         <h4 class="font-bold text-xs text-gray-700 truncate">LG LED 32 Inch TV</h4>
                         <p class="text-[10px] text-gray-500">15 Nov 2024</p>
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹ 34,580*</p>
                     </div>
+
                 </div>
             </div>
 
@@ -1094,18 +1201,59 @@ body {
                         <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹ 50,100*</p>
                     </div>
                 </div>
-            </div>
+
+   </div>
+
+
+
+
+
+
+  <div class="w-full bg-white rounded-xl shadow-md p-4">
+                <div class="flex gap-4 justify-center">
+                    <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
+                        <div class="prod-img-box">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvYyRXtbLGyCFwkXPh3JX2o0WScCcOSTVUFDURM3o9fYCwO6XImxhmB322tgW6B4ZAd44Q9QeMpOHuZTuWGDNRt0yv1Ar59rZW49FqCqNCPKtK0S93-zhrhP_nJ3mnAd_p-5WBiINScwtrLMKWc6TvDqJJVeBOpRAbs-dbkmmXAAxer8Um_l_KNUry4np7/s1100/CANTEEN%20-%202.jpeg" alt="Activa" draggable="false" />
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-700 truncate"> Studds Ninja Concept Helmet- Black (XL)</h4>
+                        <p class="text-[10px] text-gray-500">20 Jan 2026</p>
+                        <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹780*</p>
+                    </div>
+                    <div class="w-44 bg-gray-50 rounded-xl shadow-sm p-2 text-center border border-gray-100 flex flex-col justify-between">
+                        <div class="prod-img-box">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUBiLyb8z3Tna2fAKA-G0O3hE1Ug3A6q4N0XsX7eBlVJ9u_9FNDn-gLXu9S9f6A1ml-Pho38iKLA-M9oJ_Kc7ISMYHaqAoTL_den-MWDsjH0xDJyG-Qdk8uUcce2HFFDgq_tTe8wjLQaDPDTVTXY-cU_EW8CZMMeEmWAti1ZDrex8QhkSJgs0nTTIuIiS1/s1100/CANTEEN%20-%203.jpeg" alt="XUV300" draggable="false" />
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-700 truncate"> Medium Check-in Suitcase (65 cm) </h4>
+                        <p class="text-[10px] text-gray-500">20 Jan 2026</p>
+                        <p class="font-extrabold mt-0.5 text-indigo-600 text-sm">₹6,400*</p>
+                    </div>
+                </div>
+
+ </div>
+
+
+
+
+
+
+
+
+
+
 
             <!-- Action Buttons -->
-            <div class="mb-12 flex gap-4 justify-center">
-                <button id="flipBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Order</button>
+            <!-- Action Buttons -->
+<div class="mb-12 flex gap-4 justify-center">
+    <button id="flipBtn"
+        class="px-3 py-1 bg-indigo-600 text-white font-medium text-xs rounded-md hover:bg-indigo-700 transition shadow">
+        Check Order
+    </button>
 
                 <!-- मुख्य ट्रिगर बटन -->
                 <button class="quota-btn" onclick="openModal('quotaModal')">Liquor Quota</button>
 
-                <button id="profileBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg hover:bg-indigo-700 transition shadow">Check Profile</button>
+                <button id="profileBtn" class="px-3 py-1 bg-indigo-600 text-white font-medium text-xs rounded-md hover:bg-indigo-700 transition shadow">Check Profile</button>
             </div>
-        </div>
         
         <!-- Footer Info -->
         <div class="text-[11px] text-gray-400 font-medium pt-4 pb-2 text-center w-full border-t border-gray-200/50"> © Indian Armed Forces CSD Portal 2026</div>
@@ -1285,6 +1433,7 @@ body {
                 <img src="https://www.pngmart.com/files/7/Grocery-PNG-Clipart.png" alt="CSD Status" class="w-40 h-auto" draggable="false">
             </div>
             <p class="text-gray-800 font-bold text-lg mb-3">Your Groceries Has Been Delivered Successfully</p>
+<small><p> Delivered By <strong> L/Nk Satveer Kumar</strong></p></small><br/>
             <p class="text-red-600 text-xs tracking-wider mb-2">CSD ORDER ID - <span class="font-bold text-sm">GA456678GTM</span></p>
             <p class="text-emerald-600 font-black text-2xl mt-2">Amount- ₹6296/-</p>
             <p class="text-gray-500 text-xs mt-2">Next Shopping Grocery Is Available On <strong>June 15th</strong></p>
@@ -1654,6 +1803,55 @@ function handleAddToCart() {
 
 // DOM लोड होने पर लिस्ट चालू करें
 document.addEventListener("DOMContentLoaded", initializeLiquorList);
+
+
+/* Notification Slider JavaScript Start */
+(function() {
+    document.addEventListener("DOMContentLoaded", function() {
+        const sliderContainer = document.getElementById('custom-notice-slider-998');
+        if (!sliderContainer) return;
+        
+        const list = document.getElementById('notice-ticker-list');
+        const items = list.querySelectorAll('.notice-item');
+        if (items.length === 0) return;
+
+        let currentIndex = 0;
+        const totalItems = items.length;
+        const itemHeight = 28;
+
+        const firstClone = items[0].cloneNode(true);
+        list.appendChild(firstClone);
+
+        let tickerInterval;
+
+        function startTicker() {
+            tickerInterval = setInterval(() => {
+                currentIndex++;
+                list.style.transition = "transform 0.5s ease-in-out";
+                list.style.transform = `translateY(-${currentIndex * itemHeight}px)`;
+
+                if (currentIndex === totalItems) {
+                    setTimeout(() => {
+                        list.style.transition = "none";
+                        currentIndex = 0;
+                        list.style.transform = `translateY(0)`;
+                    }, 500); 
+                }
+            }, 5000); // 5000ms = 5 सेकंड का इंतज़ार
+        }
+
+        function stopTicker() {
+            clearInterval(tickerInterval);
+        }
+
+        sliderContainer.addEventListener('mouseenter', stopTicker);
+        sliderContainer.addEventListener('mouseleave', startTicker);
+
+        startTicker();
+    });
+})();
+/* Notification Slider JavaScript End */
+
 
     </script>
 </body>
